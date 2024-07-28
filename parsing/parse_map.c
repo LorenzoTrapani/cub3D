@@ -12,14 +12,53 @@
 
 #include "cub3D.h"
 
+bool	is_texture(char *line)
+{
+	if (line[0] == 'N' && line[1] == 'O')
+		return (true);
+	if (line[0] == 'S' && line[1] == 'O')
+		return (true);
+	if (line[0] == 'W' && line[1] == 'E')
+		return (true);
+	if (line[0] == 'E' && line[1] == 'A')
+		return (true);
+	if (line[0] == 'S' && line[1] == ' ')
+		return (true);
+	return (false);
+}
+
+bool	is_empty(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		if (!ft_isspace(line[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 int	check_line(char *line)
 {
-	if (line)
-		printf("Daje\n");
+	if(!line)
+		return (0);
+	if (is_empty(line))
+		return (1);
+	/*if (line[0] == 'R')
+		return (parse_res(line));
+	if (is_texture(line))
+		return (parse_texture(line));
+	if (line[0] == 'F' || line[0] == 'C')
+		return (parse_color(line));
+	if (line[0] == '1' || line[0] == ' ')
+		return (parse_map(line));*/
 	return (1);
 }
 
-int	get_map(char *file)
+int	parse_map(char *file)
 {
 	int		fd;
 	char	*line;
@@ -36,43 +75,5 @@ int	get_map(char *file)
 		free(line);
 		line = ft_get_next_line(fd);
 	}
-	return (1);
-}
-
-int	check_ext(char *file, char *ext)
-{
-	int	i;
-	int	j;
-
-	i = ft_strlen(file);
-	j = ft_strlen(ext);
-	if (i < j)
-		return (0);
-	while (j >= 0)
-	{
-		if (file[i] != ext[j])
-			return (0);
-		i--;
-		j--;
-	}
-	return (1);
-}
-
-int	check_map(char *file)
-{
-	//parsing map
-	if (!get_map(file))
-		return (0);
-	return (1);
-}
-
-int	map_validation(int argc, char **argv)
-{
-	if (argc != 2)
-		return (perror("Error: Wrong number of arguments\n"), 0);
-	if (!check_ext(argv[1], ".cub"))
-		return (perror("Error: Wrong file extension\n"), 0);
-	if (!check_map(argv[1]))
-		return (0);
 	return (1);
 }

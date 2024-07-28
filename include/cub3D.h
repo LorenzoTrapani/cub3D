@@ -10,7 +10,10 @@
 # include <math.h>
 
 
-/*-------PARSE_FILE-------*/
-int map_validation(int argc, char **argv);
+/*-------FILE_VALIDATION-------*/
+int file_validation(int argc, char **argv);
+/*-------PARSE_MAP-------*/
+int	parse_map(char *file);
+
 
 #endif
