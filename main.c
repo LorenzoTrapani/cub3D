@@ -2,9 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	if (argc != 2)
-		perror("Error: Wrong number of arguments\n");
-	if (!parse_file(argv[1]))
+	if (!map_validation(argc, argv))
 		return (0);
 	return (1);
 }

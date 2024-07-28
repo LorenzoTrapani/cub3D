@@ -11,6 +11,6 @@
 
 
 /*-------PARSE_FILE-------*/
-int		parse_file(char *file);
+int map_validation(int argc, char **argv);
 
 #endif
