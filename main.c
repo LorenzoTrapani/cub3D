@@ -1,9 +1,10 @@
 #include "cub3D.h"
 
-int main()
+int main(int argc, char **argv)
 {
-    printf("cub3D!\n");
+	if (argc != 2)
+		perror("Error: Wrong number of arguments\n");
+	if (!parse_file(argv[1]))
+		return (0);
+	return (1);
 }
-/*
-LDFLAGS    = -Lmlx -lmlx -Llibft -lft -L/usr/include/../lib -lXext -lX11 -lm
-*/

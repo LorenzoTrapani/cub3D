@@ -2,10 +2,15 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "get_next_line.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+
+
+/*-------PARSE_FILE-------*/
+int		parse_file(char *file);
 
 #endif
