@@ -1,7 +1,8 @@
 NAME       = cub3D
 CC         = cc
-CFLAGS     = -Wall -Wextra -Werror -g -I./include
-LDFLAGS    = -Lmlx -lmlx -Llibft -lft -L/usr/include/../lib -lXext -lX11 -lm
+CFLAGS 		= -Wall -Wextra -Werror -g -Iinclude -Ilibft -Imlx
+LDFLAGS		= -Llibft -Lmlx
+LINKS		= -lft -lm -lmlx -lX11 -lXext
 RM         = rm -f
 LIBFT      = libft/libft.a
 MINILIBX   = mlx/libmlx.a
@@ -13,22 +14,24 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 	@[ -f $(LIBFT) ] || make -C libft/
-	@[ -f $(MINILIBX) ] || make -C ./mlx/
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+	@[ -f $(MINILIBX) ] || make -C mlx/ > /dev/null 2>&1
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(SRC) $(LINKS) -o $(NAME)
 	@echo "${BLUE} ${NAME} -> ${YELLOW}Success${NO_COLOR}"
 
 clean:
-	@$(RM) -r 
 	@make clean -C libft/
+	@make clean -C ./mlx/ > /dev/null 2>&1
+	@echo "${BLUE} ${NAME} -> ${RED}Cleaned${NO_COLOR}"
 
 fclean: clean
-	@make clean -C ./mlx/
 	@make fclean -C libft/
+	@make clean -C ./mlx/ > /dev/null 2>&1
 	@$(RM) $(NAME)
+	@echo "${BLUE} ${NAME} -> ${RED}Fcleaned${NO_COLOR}"
 
 re: fclean all
 
-.SILENT: all
+.SILENT:
 .PHONY: all clean fclean re
 
 RED         := ${shell tput setaf 1}
