@@ -17,6 +17,9 @@
 # define KEY_S XK_s
 # define KEY_D XK_d
 
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 800
+
 typedef	struct s_map
 {
 	char		**map_mtx;

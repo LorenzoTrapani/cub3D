@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_window.c                                      :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:39:31 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/29 17:18:24 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:24:26 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_hook(int keycode, t_data *data)
 
 void	open_window(t_data *data)
 {
-	data->window = mlx_new_window(data->mlx, 800, 600, "cub3D");
+	data->window = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	mlx_key_hook(data->window, key_hook, data);
 	mlx_hook(data->window, DestroyNotify, StructureNotifyMask, close_window, data);
 }
