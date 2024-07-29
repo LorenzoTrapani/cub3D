@@ -9,11 +9,27 @@
 # include <fcntl.h>
 # include <math.h>
 
+typedef	struct s_map
+{
+	char		**map_mtx;
+	int			width;
+	int			height;
+}				t_map;
+
+
+typedef struct s_data
+{
+	void		*mlx;
+	int			fd;
+	t_map		map;
+}				t_data;
+
 
 /*-------FILE_VALIDATION-------*/
-int file_validation(int argc, char **argv);
+int file_validation(t_data *data, int argc, char **argv);
 /*-------PARSE_MAP-------*/
-int	parse_map(char *file);
+int	get_map(t_data *data, char *file);
+void	cleanup(t_data *data);
 
 
 #endif

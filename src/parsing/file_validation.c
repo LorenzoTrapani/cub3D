@@ -20,13 +20,13 @@ int	check_ext(char *file, char *ext)
 	return (1);
 }
 
-int	file_validation(int argc, char **argv)
+int	file_validation(t_data *data, int argc, char **argv)
 {
 	if (argc != 2)
 		return (perror("Error: Wrong number of arguments\n"), 0);
 	if (!check_ext(argv[1], ".cub"))
 		return (perror("Error: Wrong file extension\n"), 0);
-	if (!parse_map(argv[1]))
+	if (!get_map(data, argv[1]))
 		return (0);
 	return (1);
 }

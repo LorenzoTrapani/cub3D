@@ -7,9 +7,10 @@ RM         = rm -f
 LIBFT      = libft/libft.a
 MINILIBX   = mlx/libmlx.a
 
-SRC		   = main.c \
-			parsing/file_validation.c \
-			parsing/parse_map.c \
+SRC		   = src/main.c \
+			src/parsing/file_validation.c \
+			src/parsing/parse_map.c \
+			src/free/cleanup.c \
 
 all: $(NAME)
 
