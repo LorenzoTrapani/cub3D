@@ -2,17 +2,12 @@
 
 Elementi del File di Configurazione:
 
-RISOLUZIONE: Definisce la risoluzione della finestra di gioco.
-```
-R 1920 1080
-```
 TEXTURE: Percorsi verso le immagini delle texture per le pareti, il soffitto e il pavimento.
 
 	NO ./path_to_the_north_texture
 	SO ./path_to_the_south_texture
 	WE ./path_to_the_west_texture
 	EA ./path_to_the_east_texture
-	S  ./path_to_the_sprite_texture
 
 COLORI: Colori del cielo e del pavimento in formato RGB.
 ```  
@@ -37,7 +32,6 @@ ERROR HANDLING...
 
 - PARSING IMPLEMENTATION:
 
-    - [ ] Implementa il parsing della risoluzione
     - [ ] Implementa il parsing delle texture
     - [ ] Implementa il parsing dei colori
     - [ ] Implementa il parsing della mappa
@@ -69,3 +63,13 @@ function parse_color(line):
 function parse_map(line):
     // Aggiungi la linea alla matrice della mappa
 ```
+
+# MLX:
+
+- mlx_init()
+- mlx_new_window
+- mlx_xpm_file_to_image
+- mlx_put_image_to_window
+- mlx_key_hook(key_hook->close_window)
+- mlx_hook(close_window)
+- mlx_loop

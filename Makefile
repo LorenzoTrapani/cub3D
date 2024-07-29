@@ -8,9 +8,11 @@ LIBFT      = libft/libft.a
 MINILIBX   = mlx/libmlx.a
 
 SRC		   = src/main.c \
-			src/parsing/file_validation.c \
-			src/parsing/parse_map.c \
+			src/init/file_validation.c \
+			src/init/parse_line.c \
+			src/init/texture.c \
 			src/free/cleanup.c \
+			src/mlx/window.c \
 
 all: $(NAME)
 
@@ -32,6 +34,9 @@ fclean: clean
 	@echo "${BLUE} ${NAME} -> ${RED}Fcleaned${NO_COLOR}"
 
 re: fclean all
+
+valgrind: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 .SILENT:
 .PHONY: all clean fclean re

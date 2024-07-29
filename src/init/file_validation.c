@@ -1,61 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   file_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 13:31:40 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/29 13:00:17 by lotrapan         ###   ########.fr       */
+/*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
+/*   Updated: 2024/07/29 18:14:09 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-bool	is_texture(char *line)
-{
-	if (line[0] == 'N' && line[1] == 'O')
-		return (true);
-	if (line[0] == 'S' && line[1] == 'O')
-		return (true);
-	if (line[0] == 'W' && line[1] == 'E')
-		return (true);
-	if (line[0] == 'E' && line[1] == 'A')
-		return (true);
-	if (line[0] == 'S' && line[1] == ' ')
-		return (true);
-	return (false);
-}
-
-bool	is_empty(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i])
-	{
-		if (!ft_isspace(line[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-int	check_line(char *line)
-{
-	if (!line)
-		return (0);
-	if (is_empty(line))
-		return (1);
-	if (line && line[0] == 'R')
-		return (1);
-	if (is_texture(line))
-		return (1);
-	if (line && (line[0] == 'F' || line[0] == 'C'))
-		return (1);
-	else
-		return (1);
-}
 
 int	add_map_line(t_data *data, char *line, char **buffer)
 {
@@ -75,10 +30,10 @@ int	get_map(t_data *data, char *file)
 	int		fd;
 	char	*line;
 	char	*buffer;
-	int		is_map;
+	int		error;
 
 	line = NULL;
-	is_map = 0;
+	error = 0;
 	buffer = ft_strdup("");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -86,14 +41,47 @@ int	get_map(t_data *data, char *file)
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		if (line && !check_line(line)) // da freeare line
-			return (free(buffer), 0);
+		parse_line(&data->tex, line, &error);
 		add_map_line(data, line, &buffer);
 		free(line);
 		line = ft_get_next_line(fd);
 	}
 	close(fd);
-	data->map.map_mtx = ft_split(buffer, '\n');
+	if (!error)
+		data->map.map_mtx = ft_split(buffer, '\n');
 	free(buffer);
 	return (1);
 }
+
+int	check_extension(char *file, char *ext)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(file);
+	j = ft_strlen(ext);
+	if (i < j)
+		return (0);
+	while (j >= 0)
+	{
+		if (file[i] != ext[j])
+			return (0);
+		i--;
+		j--;
+	}
+	return (1);
+}
+
+int	file_validation(t_data *data, int argc, char **argv)
+{
+	if (argc != 2)
+		return (perror("Error: Wrong number of arguments\n"), 0);
+	if (!check_extension(argv[1], ".cub"))
+		return (perror("Error: Wrong file extension\n"), 0);
+	if (!get_map(data, argv[1]))
+		return (0);
+	if (data->map.width == 0 || data->map.height == 0)
+		return (perror("Error: Empty map\n"), cleanup(data), 0);
+	return (1);
+}
+//TODO map validation
