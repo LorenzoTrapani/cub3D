@@ -11,6 +11,7 @@ SRC		   = src/main.c \
 			src/init/file_validation.c \
 			src/init/parse_line.c \
 			src/init/texture.c \
+			src/init/map.c \
 			src/free/cleanup.c \
 			src/mlx/window.c \
 

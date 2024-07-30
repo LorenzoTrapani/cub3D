@@ -6,13 +6,13 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:06:51 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/29 17:25:12 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:47:21 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 

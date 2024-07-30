@@ -57,4 +57,6 @@ void	open_window(t_data *data);
 /*-------TEXTURE-------*/
 int	get_texture(t_tex *texture, char *line, int *error);
 
+int	map_validation(t_map map);
+
 #endif

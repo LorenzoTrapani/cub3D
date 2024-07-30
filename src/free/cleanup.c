@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:04:52 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/29 18:04:04 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:43:10 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,19 @@
 
 void	free_texture(t_tex *tex)
 {
-	if (tex->north)
-	{
+	if (tex && tex->north)
 		free(tex->north);
-	}
-	if (tex->south)
-	{
+	if (tex && tex->south)
 		free(tex->south);
-	}
-	if (tex->west)
-	{
+	if (tex && tex->west)
 		free(tex->west);
-	}
-	if (tex->east)
-	{
+	if (tex && tex->east)
 		free(tex->east);
-	}
 }
+
 void	cleanup(t_data *data)
 {
-	ft_free_matrix(data->map.map_mtx);
+	if (data->map.map_mtx)
+		ft_free_matrix(data->map.map_mtx);
 	free_texture(&data->tex);
 }

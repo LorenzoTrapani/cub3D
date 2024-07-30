@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/29 18:14:09 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:44:09 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ int	file_validation(t_data *data, int argc, char **argv)
 		return (perror("Error: Wrong file extension\n"), 0);
 	if (!get_map(data, argv[1]))
 		return (0);
-	if (data->map.width == 0 || data->map.height == 0)
-		return (perror("Error: Empty map\n"), cleanup(data), 0);
+	if (!map_validation(data->map))
+	{
+		cleanup(data);
+		return (perror("Error: Invalid map\n"), 0);
+	}
 	return (1);
 }
-//TODO map validation

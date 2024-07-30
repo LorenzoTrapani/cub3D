@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:31:40 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/29 18:11:10 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:46:25 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	is_empty(char *line)
 	return (true);
 }
 
-static int rgb_to_int(int r, int g, int b)
+static int	rgb_to_int(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
