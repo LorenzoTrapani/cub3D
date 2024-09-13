@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/30 15:44:09 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:27:49 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 int	add_map_line(t_data *data, char *line, char **buffer)
 {
 	const int		len = ft_strlen(line);
+	int 			i;
 
-	if (line && line[0] != '1')
+	i = 0;
+	while (line && ft_isspace(line[i]))
+		i++;
+	if (line && line[i] != '1')
 		return (0);
 	*buffer = ft_strjoin(*buffer, line);
 	if (len > data->map.width)
