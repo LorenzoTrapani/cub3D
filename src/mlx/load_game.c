@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 13:06:51 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/20 13:47:49 by lotrapan         ###   ########.fr       */
+/*   Created: 2024/09/20 13:15:35 by lotrapan          #+#    #+#             */
+/*   Updated: 2024/09/20 16:51:54 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+# include "cub3D.h"
 
-int	main(int argc, char **argv)
+int	load_game(t_data *data)
 {
-	t_data	data;
-
-	data = (t_data){0};
-	if (!file_validation(&data, argc, argv))
-		return (0);
-	data.mlx = mlx_init();
-	open_window(&data);
-	load_game(&data);
-	mlx_loop(data.mlx);
+	handle_movement(data);
+	open_minimap(data);
 	return (1);
 }

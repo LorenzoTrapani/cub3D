@@ -14,6 +14,10 @@ SRC		   = src/main.c \
 			src/init/map.c \
 			src/free/cleanup.c \
 			src/mlx/window.c \
+			src/mlx/movement.c \
+			src/mlx/minimap.c \
+			src/mlx/player.c \
+			src/mlx/load_game.c \
 
 all: $(NAME)
 
