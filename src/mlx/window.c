@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:39:31 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/20 16:51:46 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:30:35 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ int	key_press(int keycode, t_data *data)
 		data->keys[KEY_A] = 1;
 	if (keycode == KEY_D)
 		data->keys[KEY_D] = 1;
+	if (keycode == KEY_LEFT)
+		data->player.rot = 1;
+	if (keycode == KEY_RIGHT)
+		data->player.rot = -1;
+	if (keycode == KEY_M)
+		data->minimap.show = true;
 	return (0);
 }
 
@@ -49,14 +55,16 @@ int	key_release(int keycode, t_data *data)
 	if (keycode == KEY_D)
 		data->keys[KEY_D] = 0;
 	if (keycode == KEY_M)
-		data->minimap.show = !data->minimap.show;
+		data->minimap.show = false;
+	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+		data->player.rot = 0;
 	return (0);
 }
 
 void	open_window(t_data *data)
 {
-	init_player(data);
 	data->window = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	init_player(data);
 	mlx_hook(data->window, KeyPress, KeyPressMask, &key_press, data);
 	mlx_hook(data->window, KeyRelease, KeyReleaseMask, &key_release, data);
 	mlx_hook(data->window, DestroyNotify, StructureNotifyMask, &close_window, data);

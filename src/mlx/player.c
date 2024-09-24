@@ -6,11 +6,23 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/20 17:33:58 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:16:26 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void get_direction(char c, t_player *player)
+{
+	if (c == 'N')
+		player->dir = 90;
+	else if (c == 'S')
+		player->dir = 270;
+	else if (c == 'E')
+		player->dir = 0;
+	else if (c == 'W')
+		player->dir = 180;
+}
 
 int get_position(char **map_mtx, t_player *player)
 {
@@ -26,9 +38,9 @@ int get_position(char **map_mtx, t_player *player)
 			if (map_mtx[i][j] == 'N' || map_mtx[i][j] == 'S' || map_mtx[i][j] == 'E' || map_mtx[i][j] == 'W')
 			{
 				map_mtx[i][j] = '0';
-				player->x = j;
-				player->y = i;
-				get_angle(map_mtx[i][j], player);
+				player->x = j * TILE_SIZE;
+				player->y = i * TILE_SIZE;
+				get_direction(map_mtx[i][j], player);
 				return (1);
 			}
 		}
@@ -36,20 +48,12 @@ int get_position(char **map_mtx, t_player *player)
 	return (0);
 }
 
-void get_angle(char c, t_player *player)
-{
-	if (c == 'N')
-		player->angle = 3 * M_PI_2;
-	else if (c == 'S')
-		player->angle = M_PI_2;
-	else if (c == 'E')
-		player->angle = 0;
-	else if (c == 'W')
-		player->angle = M_PI;
-}
 
 void init_player(t_data *data)
 {
-	get_position(data->map.map_mtx, &data->player);
-	printf("Player position: x: %f, y: %f, angle: %f\n", data->player.x, data->player.y, data->player.angle);
+	if (!get_position(data->map.map_mtx, &data->player)) 
+	{
+        printf("Error: Player position not found!\n");
+        exit(1);
+    }
 }

@@ -18,6 +18,8 @@ SRC		   = src/main.c \
 			src/mlx/minimap.c \
 			src/mlx/player.c \
 			src/mlx/load_game.c \
+			src/mlx/rotation.c \
+			src/mlx/rays.c \
 
 all: $(NAME)
 
