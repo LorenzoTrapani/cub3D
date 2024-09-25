@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/24 17:16:26 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:40:15 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 void get_direction(char c, t_player *player)
 {
 	if (c == 'N')
-		player->dir = 90;
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+	}
 	else if (c == 'S')
-		player->dir = 270;
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+	}
 	else if (c == 'E')
-		player->dir = 0;
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+	}
 	else if (c == 'W')
-		player->dir = 180;
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+	}
 }
 
 int get_position(char **map_mtx, t_player *player)

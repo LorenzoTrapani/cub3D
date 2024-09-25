@@ -6,13 +6,13 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/24 17:14:49 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:50:21 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	move_right(t_data *data, double new_x, double new_y)
+/* void	move_right(t_data *data, double new_x, double new_y)
 {
 	if (data->map.map_mtx[(int)(data->player.y + (new_x * TILE_SIZE / 2)) / TILE_SIZE]
 		[(int)(data->player.x + (new_y * TILE_SIZE / 2)) / TILE_SIZE] == '0')
@@ -67,4 +67,4 @@ void handle_movement(t_data *data)
 		move_left(data, new_x, new_y);
 	if (data->keys[KEY_D])
 		move_right(data, new_x, new_y);
-}
+} */

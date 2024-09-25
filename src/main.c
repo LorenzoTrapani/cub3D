@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:06:51 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/23 14:49:01 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:56:46 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	main(int argc, char **argv)
 	if (!file_validation(&data, argc, argv))
 		return (0);
 	data.mlx = mlx_init();
+	init_player(&data);
 	open_window(&data);
-	load_game(&data);
+	mlx_loop_hook(data.mlx, &game_loop, &data);
 	mlx_loop(data.mlx);
 	return (1);
 }

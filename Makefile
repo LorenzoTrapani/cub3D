@@ -11,15 +11,17 @@ SRC		   = src/main.c \
 			src/init/file_validation.c \
 			src/init/parse_line.c \
 			src/init/texture.c \
-			src/init/map.c \
+			src/init/map_validation.c \
 			src/free/cleanup.c \
+			src/mlx/game_loop.c \
+			src/mlx/draw.c \
+			src/mlx/render.c \
 			src/mlx/window.c \
-			src/mlx/movement.c \
-			src/mlx/minimap.c \
-			src/mlx/player.c \
-			src/mlx/load_game.c \
-			src/mlx/rotation.c \
 			src/mlx/rays.c \
+			src/mlx/minimap.c \
+			src/player/movement.c \
+			src/player/player.c \
+			src/player/rotation.c \
 
 all: $(NAME)
 
