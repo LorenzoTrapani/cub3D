@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:31:40 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/07/30 15:46:25 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:56:25 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	is_empty(char *line)
 
 static int	rgb_to_int(int r, int g, int b)
 {
-	return (r << 16 | g << 8 | b);
+	return (r << 16 | g << 8 | b << 0);
 }
 
 void	get_color(t_tex *texture, char *line, int *error)
@@ -52,10 +52,12 @@ void	get_color(t_tex *texture, char *line, int *error)
 
 	r = ft_atoi(line + 2, error);
 	g = ft_atoi(ft_strchr(line + 2, ',') + 1, error);
-	b = ft_atoi(ft_strrchr(line + 2, ','), error);
+ 	b = ft_atoi(ft_strrchr(line + 2, ',') + 1, error);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		*error = 1;
 	if (line[0] == 'F')
 		texture->floor = rgb_to_int(r, g, b);
-	else
+	else if (line[0] == 'C')
 		texture->ceiling = rgb_to_int(r, g, b);
 }
 

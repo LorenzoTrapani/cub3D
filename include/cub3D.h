@@ -110,7 +110,6 @@ void	render_minimap(t_data *data);
 void	open_window(t_data *data);
 /*-------PLAYER-------*/
 void	init_player(t_data *data);
-
-
+void	handle_movement(t_data *data);
 
 #endif

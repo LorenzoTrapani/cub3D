@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 16:00:54 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:04:59 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	render_ceiling(t_data *data)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			draw_pixel(data->img, x, y, BLUE);
+			draw_pixel(data->img, x, y, data->tex.ceiling);
 	}
 }
 
@@ -36,7 +36,7 @@ void	render_floor(t_data *data)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			draw_pixel(data->img, x, y, ORANGE);
+			draw_pixel(data->img, x, y, data->tex.floor);
 	}
 }
 
@@ -47,14 +47,14 @@ void render_minimap(t_data *data)
 	int color;
 
 	y = -1;
-	/* if (data->minimap.show == false)
-		return ; */
+	if (data->minimap.show == false)
+		return ;
 	while (++y < data->map.height)
 	{
 		x = -1;
 		while (++x < (int)ft_strlen(data->map.map_mtx[y]))
 		{
-			color = BLUE;
+			color = data->tex.ceiling;
 			if (data->map.map_mtx[y][x] == '1')
 				color = GREY;
 			else if (data->map.map_mtx[y][x] == '0')

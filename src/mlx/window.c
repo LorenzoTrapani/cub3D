@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:39:31 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 15:56:08 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:04:41 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	key_press(int keycode, t_data *data)
 		data->keys[KEY_A] = 1;
 	if (keycode == KEY_D)
 		data->keys[KEY_D] = 1;
-	// if (keycode == KEY_M)
-	// 	data->minimap.show = true;
+	if (keycode == KEY_M)
+		data->minimap.show = true;
 	return (0);
 }
 
@@ -50,8 +50,8 @@ int	key_release(int keycode, t_data *data)
 		data->keys[KEY_A] = 0;
 	if (keycode == KEY_D)
 		data->keys[KEY_D] = 0;
-	// if (keycode == KEY_M)
-		// data->minimap.show = false;
+	if (keycode == KEY_M)
+		data->minimap.show = false;
 	return (0);
 }
 

@@ -6,65 +6,80 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 12:50:21 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:11:25 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* void	move_right(t_data *data, double new_x, double new_y)
+void	move_forward(t_data *data, double move_speed)
 {
-	if (data->map.map_mtx[(int)(data->player.y + (new_x * TILE_SIZE / 2)) / TILE_SIZE]
-		[(int)(data->player.x + (new_y * TILE_SIZE / 2)) / TILE_SIZE] == '0')
+	double new_x;
+	double new_y;
+
+	new_x = data->player.x + data->player.dir_x * move_speed;
+	new_y = data->player.y + data->player.dir_y * move_speed;
+	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
 	{
-		data->player.x += new_y;
-		data->player.y += new_x;
+		data->player.x = new_x;
+		data->player.y = new_y;
 	}
 }
 
-void	move_left(t_data *data, double new_x, double new_y)
+void	move_backward(t_data *data, double move_speed)
 {
-	if (data->map.map_mtx[(int)(data->player.y - (new_x * TILE_SIZE / 2)) / TILE_SIZE]
-		[(int)(data->player.x - (new_y * TILE_SIZE / 2)) / TILE_SIZE] == '0')
+	double new_x;
+	double new_y;
+
+	new_x = data->player.x - data->player.dir_x * move_speed;
+	new_y = data->player.y - data->player.dir_y * move_speed;
+	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
 	{
-		data->player.x -= new_y;
-		data->player.y -= new_x;
+		data->player.x = new_x;
+		data->player.y = new_y;
 	}
 }
 
-void	move_forward(t_data *data, double new_x, double new_y)
+void	move_left(t_data *data, double move_speed)
 {
-	if (data->map.map_mtx[(int)(data->player.y - (new_x * TILE_SIZE / 2)) / TILE_SIZE]
-		[(int)(data->player.x - (new_y * TILE_SIZE / 2)) / TILE_SIZE] == '0')
+	double new_x;
+	double new_y;
+
+	new_x = data->player.x - data->player.plane_x * move_speed;
+	new_y = data->player.y - data->player.plane_y * move_speed;
+	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
 	{
-		data->player.x -= new_y;
-		data->player.y -= new_x;
+		data->player.x = new_x;
+		data->player.y = new_y;
 	}
 }
 
-void	move_backward(t_data *data, double new_x, double new_y)
+void	move_right(t_data *data, double move_speed)
 {
-	if (data->map.map_mtx[(int)(data->player.y + (new_x * TILE_SIZE / 2)) / TILE_SIZE]
-		[(int)(data->player.x + (new_y * TILE_SIZE / 2)) / TILE_SIZE] == '0')
+	double new_x;
+	double new_y;
+
+	new_x = data->player.x + data->player.plane_x * move_speed;
+	new_y = data->player.y + data->player.plane_y * move_speed;
+	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
 	{
-		data->player.x += new_y;
-		data->player.y += new_x;
+		data->player.x = new_x;
+		data->player.y = new_y;
 	}
 }
+
 
 void handle_movement(t_data *data)
 {
-	double	new_x;
-	double	new_y;
+	double move_speed;
 
-	new_x = cos(data->player.dir * M_PI / 180) * MOVE_SPEED;
-	new_y = sin(data->player.dir * M_PI / 180) * MOVE_SPEED;
+	move_speed = 0.05;
 	if (data->keys[KEY_W])
-		move_forward(data, new_x, new_y);
+		move_forward(data, move_speed);
 	if (data->keys[KEY_S])
-		move_backward(data, new_x, new_y);
+		move_backward(data, move_speed);
 	if (data->keys[KEY_A])
-		move_left(data, new_x, new_y);
+		move_left(data, move_speed);
 	if (data->keys[KEY_D])
-		move_right(data, new_x, new_y);
-} */
+		move_right(data, move_speed);
+}
