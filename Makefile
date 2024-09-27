@@ -12,16 +12,17 @@ SRC		   = src/main.c \
 			src/init/parse_line.c \
 			src/init/texture.c \
 			src/init/map_validation.c \
+			src/init/keys.c \
 			src/free/cleanup.c \
 			src/mlx/game_loop.c \
 			src/mlx/draw.c \
 			src/mlx/render.c \
 			src/mlx/window.c \
 			src/mlx/rays.c \
-			src/mlx/minimap.c \
 			src/player/movement.c \
 			src/player/player.c \
 			src/player/rotation.c \
+			src/player/collision.c \
 
 all: $(NAME)
 

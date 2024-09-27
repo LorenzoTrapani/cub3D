@@ -6,80 +6,111 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 17:11:25 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:39:43 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	move_forward(t_data *data, double move_speed)
+
+void	orizontal_adjust(t_data *data, double dir_x)
 {
 	double new_x;
-	double new_y;
 
-	new_x = data->player.x + data->player.dir_x * move_speed;
-	new_y = data->player.y + data->player.dir_y * move_speed;
-	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
+	new_x = data->player.x + dir_x * 0.01;
+	if (!check_orizontal_collision(data, new_x))
 	{
 		data->player.x = new_x;
-		data->player.y = new_y;
+		orizontal_adjust(data, dir_x);
 	}
 }
 
-void	move_backward(t_data *data, double move_speed)
+void	vertical_adjust(t_data *data, double dir_y)
 {
-	double new_x;
 	double new_y;
 
-	new_x = data->player.x - data->player.dir_x * move_speed;
-	new_y = data->player.y - data->player.dir_y * move_speed;
-	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
+	new_y = data->player.y + dir_y * 0.01;
+	if (!check_vertical_collision(data, new_y))
 	{
-		data->player.x = new_x;
 		data->player.y = new_y;
+		vertical_adjust(data, dir_y);
 	}
 }
-
-void	move_left(t_data *data, double move_speed)
+void move_forward(t_data *data)
 {
-	double new_x;
+    double new_y;
+
+	new_y = -MOVE_SPEED * data->player.dir_y + data->player.y;
+	if (!check_vertical_collision(data, new_y))
+	{
+		data->player.y = new_y;
+		return ;
+	}
+	vertical_adjust(data, -data->player.dir_y);
+}
+
+
+void	move_backward(t_data *data)
+{
 	double new_y;
 
-	new_x = data->player.x - data->player.plane_x * move_speed;
-	new_y = data->player.y - data->player.plane_y * move_speed;
-	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
+	new_y = MOVE_SPEED * data->player.dir_y + data->player.y;
+	if (!check_vertical_collision(data, new_y))
 	{
-		data->player.x = new_x;
 		data->player.y = new_y;
+		return ;
 	}
+	vertical_adjust(data, data->player.dir_y);	
 }
 
-void	move_right(t_data *data, double move_speed)
+void	move_left(t_data *data)
 {
 	double new_x;
-	double new_y;
 
-	new_x = data->player.x + data->player.plane_x * move_speed;
-	new_y = data->player.y + data->player.plane_y * move_speed;
-	if (data->map.map_mtx[(int)new_y][(int)new_x] != '1')
+	new_x = -MOVE_SPEED * data->player.dir_x + data->player.x;
+	if (!check_orizontal_collision(data, new_x))
 	{
 		data->player.x = new_x;
-		data->player.y = new_y;
+		return ;
 	}
+	orizontal_adjust(data, -data->player.dir_x);
 }
 
+void	move_right(t_data *data)
+{
+	double new_x;
+
+	new_x = MOVE_SPEED * data->player.dir_x + data->player.x;
+	if (!check_orizontal_collision(data, new_x))
+	{
+		data->player.x = new_x;
+		return ;
+	}
+	orizontal_adjust(data, data->player.dir_x);
+}
 
 void handle_movement(t_data *data)
 {
-	double move_speed;
-
-	move_speed = 0.05;
-	if (data->keys[KEY_W])
-		move_forward(data, move_speed);
-	if (data->keys[KEY_S])
-		move_backward(data, move_speed);
-	if (data->keys[KEY_A])
-		move_left(data, move_speed);
-	if (data->keys[KEY_D])
-		move_right(data, move_speed);
-}
+	if (data->player.orientation == 'N' || data->player.orientation == 'S')
+	{
+		if (data->keys[0] == 1)
+			move_forward(data);
+		if (data->keys[1] == 1)
+			move_backward(data);
+		if (data->keys[2] == 1)
+			move_left(data);
+		if (data->keys[3] == 1)
+			move_right(data);
+	}
+	else if (data->player.orientation == 'E' || data->player.orientation == 'W')
+	{
+		if (data->keys[0] == 1)
+			move_right(data);
+		if (data->keys[1] == 1)
+			move_left(data);
+		if (data->keys[2] == 1)
+			move_forward(data);
+		if (data->keys[3] == 1)
+			move_backward(data);
+	}
+} 

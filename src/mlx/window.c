@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:39:31 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 17:04:41 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:51:22 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	key_press(int keycode, t_data *data)
 	if (keycode == KEY_ESC)
 		close_window(data);
 	if (keycode == KEY_W)
-		data->keys[KEY_W] = 1;
+		data->keys[0] = 1;
 	if (keycode == KEY_S)
-		data->keys[KEY_S] = 1;
+		data->keys[1] = 1;
 	if (keycode == KEY_A)
-		data->keys[KEY_A] = 1;
+		data->keys[2] = 1;
 	if (keycode == KEY_D)
-		data->keys[KEY_D] = 1;
+		data->keys[3] = 1;
 	if (keycode == KEY_M)
 		data->minimap.show = true;
 	return (0);
@@ -43,13 +43,13 @@ int	key_press(int keycode, t_data *data)
 int	key_release(int keycode, t_data *data)
 {
 	if (keycode == KEY_W)
-		data->keys[KEY_W] = 0;
+		data->keys[0] = 0;
 	if (keycode == KEY_S)
-		data->keys[KEY_S] = 0;
+		data->keys[1] = 0;
 	if (keycode == KEY_A)
-		data->keys[KEY_A] = 0;
+		data->keys[2] = 0;
 	if (keycode == KEY_D)
-		data->keys[KEY_D] = 0;
+		data->keys[3] = 0;
 	if (keycode == KEY_M)
 		data->minimap.show = false;
 	return (0);

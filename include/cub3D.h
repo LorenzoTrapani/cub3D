@@ -24,7 +24,7 @@
 # define WIN_HEIGHT 800
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MOVE_SPEED 0.01
+# define MOVE_SPEED 1
 # define ROTATE_SPEED 0.1
 # define FOV 60
 # define NUM_RAYS 100
@@ -39,13 +39,6 @@
 # define GREEN 0x0000FF00
 # define ORANGE 0x00FFA500
 
-typedef	struct s_map
-{
-	char		**map_mtx;
-	int			width;
-	int			height;
-}				t_map;
-
 typedef struct s_tex
 {
 	void		*north;
@@ -56,6 +49,13 @@ typedef struct s_tex
 	int			ceiling;
 }			t_tex;
 
+typedef	struct s_map
+{
+	char		**map_mtx;
+	int			width;
+	int			height;
+}				t_map;
+
 typedef struct s_player
 {
 	double		x;
@@ -64,6 +64,7 @@ typedef struct s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	char 		orientation;
 }				t_player;
 
 typedef struct s_minimap
@@ -72,22 +73,15 @@ typedef struct s_minimap
 	bool 		show;
 }				t_minimap;
 
-typedef struct s_ray 
-{
-    double angle;     
-    double distance;
-} 				t_ray;
-
 typedef struct s_data
 {
 	void		*mlx;
 	void		*window;
-	int			keys[256];
+	int			keys[6];
 	t_img		*img;
 	t_map		map;
 	t_player	player;
 	t_tex 		tex;
-	t_ray		*rays;
 	t_minimap	minimap;
 }				t_data;
 
@@ -99,6 +93,7 @@ int		file_validation(t_data *data, int argc, char **argv);
 int		parse_line(t_tex *texture, char *line, int *error);
 int		map_validation(t_map map);
 int		get_texture(t_tex *texture, char *line, int *error);
+void	init_keys(t_data *data);
 /*-------MLX-------*/
 void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_pixel(t_img *img, int x, int y, int color);
@@ -111,5 +106,7 @@ void	open_window(t_data *data);
 /*-------PLAYER-------*/
 void	init_player(t_data *data);
 void	handle_movement(t_data *data);
+int		check_orizontal_collision(t_data *data, double new_x);
+int		check_vertical_collision(t_data *data, double new_y);
 
 #endif

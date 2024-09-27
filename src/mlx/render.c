@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 17:04:59 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:43:09 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void render_minimap(t_data *data)
 	int color;
 
 	y = -1;
-	if (data->minimap.show == false)
-		return ;
+	/* if (data->minimap.show == false)
+		return ; */
 	while (++y < data->map.height)
 	{
 		x = -1;
@@ -62,6 +62,6 @@ void render_minimap(t_data *data)
 			draw_tile(data->img, x * TILE_SIZE, y * TILE_SIZE, color);
 		}
 	}
-	draw_tile(data->img, data->player.x, data->player.y, RED);
+	draw_tile(data->img, data->player.x - (TILE_SIZE / 2), data->player.y - (TILE_SIZE / 2), RED);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 10, 10);
 }
