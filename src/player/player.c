@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/27 19:38:08 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:26:59 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,27 @@ void get_direction(char c, t_player *player)
 {
 	if (c == 'N')
 	{
-		player->dir_x = 1;
-		player->dir_y = 1;
+		player->dir_x = 0;
+		player->dir_y = -1;
+		player->dir_angle = 270;
 	}
 	else if (c == 'S')
 	{
-		player->dir_x = -1;
-		player->dir_y = -1;
+		player->dir_x = 0;
+		player->dir_y = 1;
+		player->dir_angle = 90;
 	}
 	else if (c == 'E')
 	{
 		player->dir_x = 1;
-		player->dir_y = 1;
+		player->dir_y = 0;
+		player->dir_angle = 180;
 	}
 	else if (c == 'W')
 	{
 		player->dir_x = -1;
-		player->dir_y = -1;
+		player->dir_y = 0;
+		player->dir_angle = 0;
 	}
 }
 
@@ -49,7 +53,6 @@ int get_position(char **map_mtx, t_player *player)
 		{
 			if (map_mtx[i][j] == 'N' || map_mtx[i][j] == 'S' || map_mtx[i][j] == 'E' || map_mtx[i][j] == 'W')
 			{
-				player->orientation = map_mtx[i][j];
 				player->x = j * TILE_SIZE;
 				player->y = i * TILE_SIZE;
 				get_direction(map_mtx[i][j], player);

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:46:05 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 15:25:28 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:12:39 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,28 @@ void	draw_tile(t_img *img, int x, int y, int color)
 	}
 }
 
+void	draw_player(t_img *img, int x_center, int y_center, int color)
+{
+	int radius;
+	int radius_sq;
+	int x;
+	int y;
 
-
-
-
+	radius = TILE_SIZE / 2;
+	radius_sq = radius * radius;
+	x = -radius;
+	y = -radius;
+	while (x <= radius)
+	{
+		y = -radius;
+		while (y <= radius)
+		{
+			if (x * x + y * y <= radius_sq)
+			{
+				draw_pixel(img, x_center + x, y_center + y, color);
+			}
+			y++;
+		}
+		x++;
+	}
+}
