@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
+/*   Updated: 2024/10/01 14:50:37 by lotrapan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -24,9 +36,7 @@
 # define WIN_HEIGHT 800
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MOVE_SPEED 1
-# define FOV 60
-# define NUM_RAYS 100
+# define MOVE_SPEED 0.5
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
 # define TILE_SIZE 8
@@ -48,7 +58,7 @@ typedef struct s_tex
 	int			ceiling;
 }			t_tex;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	char		**map_mtx;
 	int			width;
@@ -67,7 +77,7 @@ typedef struct s_player
 typedef struct s_minimap
 {
 	char		*minimap_data;
-	bool 		show;
+	bool		show;
 }				t_minimap;
 
 typedef struct s_data
@@ -78,10 +88,9 @@ typedef struct s_data
 	t_img		*img;
 	t_map		map;
 	t_player	player;
-	t_tex 		tex;
+	t_tex		tex;
 	t_minimap	minimap;
 }				t_data;
-
 
 /*-------FREE-------*/
 void	cleanup(t_data *data);
@@ -94,7 +103,7 @@ void	init_keys(t_data *data);
 /*-------MLX-------*/
 void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_pixel(t_img *img, int x, int y, int color);
-void	draw_player(t_img *img, int x_center, int y_center, int color);
+void	draw_player(t_data *data);
 int		game_loop(t_data *data);
 void	render_ceiling(t_data *data);
 void	render_floor(t_data *data);

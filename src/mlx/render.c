@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/30 18:07:54 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:30:28 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	render_ceiling(t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
-	while (++y <  WIN_HEIGHT / 2)
+	while (++y < WIN_HEIGHT / 2)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
@@ -28,8 +28,8 @@ void	render_ceiling(t_data *data)
 
 void	render_floor(t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = WIN_HEIGHT / 2 - 1;
 	while (++y < WIN_HEIGHT)
@@ -40,15 +40,16 @@ void	render_floor(t_data *data)
 	}
 }
 
-void draw_line_dir(t_data *data)
+void	draw_line_dir(t_data *data)
 {
-	double new_x;
-    double new_y;
-	int i = 0;
+	double	new_x;
+	double	new_y;
+	int		i;
 
+	i = 0;
 	new_x = data->player.x;
 	new_y = data->player.y;
-	while (i < 30)
+	while (i < 20)
 	{
 		new_x += data->player.dir_x;
 		new_y += data->player.dir_y;
@@ -57,15 +58,15 @@ void draw_line_dir(t_data *data)
 	}
 }
 
-void render_minimap(t_data *data)
+void	render_minimap(t_data *data)
 {
-	int x;
-	int y;
-	int color;
+	int	x;
+	int	y;
+	int	color;
 
 	y = -1;
-	/* if (data->minimap.show == false)
-		return ; */
+	if (data->minimap.show == false)
+		return ;
 	while (++y < data->map.height)
 	{
 		x = -1;
@@ -79,7 +80,7 @@ void render_minimap(t_data *data)
 			draw_tile(data->img, x * TILE_SIZE, y * TILE_SIZE, color);
 		}
 	}
-	draw_player(data->img, data->player.x, data->player.y, RED);
+	draw_player(data);
 	draw_line_dir(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 10, 10);
 }

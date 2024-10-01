@@ -6,15 +6,15 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:46:05 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/30 13:12:39 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:38:35 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void draw_pixel(t_img *img, int x, int y, int color)
+void	draw_pixel(t_img *img, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
 
 	if (x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
 		return ;
@@ -36,12 +36,12 @@ void	draw_tile(t_img *img, int x, int y, int color)
 	}
 }
 
-void	draw_player(t_img *img, int x_center, int y_center, int color)
+void	draw_player(t_data *data)
 {
-	int radius;
-	int radius_sq;
-	int x;
-	int y;
+	int	radius;
+	int	radius_sq;
+	int	x;
+	int	y;
 
 	radius = TILE_SIZE / 2;
 	radius_sq = radius * radius;
@@ -53,9 +53,8 @@ void	draw_player(t_img *img, int x_center, int y_center, int color)
 		while (y <= radius)
 		{
 			if (x * x + y * y <= radius_sq)
-			{
-				draw_pixel(img, x_center + x, y_center + y, color);
-			}
+				draw_pixel(data->img, data->player.x + x,
+					data->player.y + y, RED);
 			y++;
 		}
 		x++;

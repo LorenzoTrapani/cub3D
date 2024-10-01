@@ -6,103 +6,77 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/30 17:43:32 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:48:57 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-
-void	orizontal_adjust(t_data *data, double dir_x)
+void	move_forward(t_data *data)
 {
-	double new_x;
-
-	new_x = data->player.x + dir_x * 0.01;
-	if (!check_orizontal_collision(data, new_x))
-	{
-		data->player.x = new_x;
-		orizontal_adjust(data, dir_x);
-	}
-}
-
-void	vertical_adjust(t_data *data, double dir_y)
-{
-	double new_y;
-
-	new_y = data->player.y + dir_y * 0.01;
-	if (!check_vertical_collision(data, new_y))
-	{
-		data->player.y = new_y;
-		vertical_adjust(data, dir_y);
-	}
-}
-
-void move_forward(t_data *data)
-{
-	double new_x;
-    double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = MOVE_SPEED * data->player.dir_x + data->player.x;
 	new_y = MOVE_SPEED * data->player.dir_y + data->player.y;
-	if (!check_vertical_collision(data, new_y) &&  !check_orizontal_collision(data, new_x))
+	if (!check_vertical_collision(data, new_y)
+		&& !check_orizontal_collision(data, new_x))
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
 		return ;
 	}
-	// vertical_adjust(data, -data->player.dir_y);
 }
-
 
 void	move_backward(t_data *data)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = -MOVE_SPEED * data->player.dir_x + data->player.x;
 	new_y = -MOVE_SPEED * data->player.dir_y + data->player.y;
-	if (!check_vertical_collision(data, new_y) && !check_orizontal_collision(data, new_x))
+	if (!check_vertical_collision(data, new_y)
+		&& !check_orizontal_collision(data, new_x))
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
 		return ;
 	}
-	// vertical_adjust(data, data->player.dir_y);	
 }
 
 void	move_left(t_data *data)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = MOVE_SPEED * data->player.dir_y + data->player.x;
 	new_y = -MOVE_SPEED * data->player.dir_x + data->player.y;
-	if (!check_orizontal_collision(data, new_x) && !check_vertical_collision(data, new_y))
+	if (!check_orizontal_collision(data, new_x)
+		&& !check_vertical_collision(data, new_y))
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
 		return ;
 	}
-	// orizontal_adjust(data, -data->player.dir_x);
 }
 
 void	move_right(t_data *data)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = -MOVE_SPEED * data->player.dir_y + data->player.x;
 	new_y = MOVE_SPEED * data->player.dir_x + data->player.y;
-	if (!check_orizontal_collision(data, new_x) && !check_vertical_collision(data, new_y))
+	if (!check_orizontal_collision(data, new_x)
+		&& !check_vertical_collision(data, new_y))
 	{
 		data->player.x = new_x;
 		data->player.y = new_y;
 		return ;
 	}
-	// orizontal_adjust(data, data->player.dir_x);
 }
 
-void handle_movement(t_data *data)
+void	handle_movement(t_data *data)
 {
 	if (data->keys[0] == 1)
 		move_forward(data);
@@ -112,4 +86,4 @@ void handle_movement(t_data *data)
 		move_left(data);
 	if (data->keys[3] == 1)
 		move_right(data);
-} 
+}

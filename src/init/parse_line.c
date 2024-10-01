@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:31:40 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/25 16:56:25 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:36:35 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_color(t_tex *texture, char *line, int *error)
 
 	r = ft_atoi(line + 2, error);
 	g = ft_atoi(ft_strchr(line + 2, ',') + 1, error);
- 	b = ft_atoi(ft_strrchr(line + 2, ',') + 1, error);
+	b = ft_atoi(ft_strrchr(line + 2, ',') + 1, error);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		*error = 1;
 	if (line[0] == 'F')

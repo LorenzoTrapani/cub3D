@@ -6,13 +6,13 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/30 17:26:59 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:46:44 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void get_direction(char c, t_player *player)
+void	get_direction(char c, t_player *player)
 {
 	if (c == 'N')
 	{
@@ -40,10 +40,10 @@ void get_direction(char c, t_player *player)
 	}
 }
 
-int get_position(char **map_mtx, t_player *player)
+int	get_position(char **map_mtx, t_player *player)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (map_mtx[++i])
@@ -51,7 +51,8 @@ int get_position(char **map_mtx, t_player *player)
 		j = -1;
 		while (map_mtx[i][++j])
 		{
-			if (map_mtx[i][j] == 'N' || map_mtx[i][j] == 'S' || map_mtx[i][j] == 'E' || map_mtx[i][j] == 'W')
+			if (map_mtx[i][j] == 'N' || map_mtx[i][j] == 'S' ||
+				map_mtx[i][j] == 'E' || map_mtx[i][j] == 'W')
 			{
 				player->x = j * TILE_SIZE;
 				player->y = i * TILE_SIZE;
@@ -64,12 +65,11 @@ int get_position(char **map_mtx, t_player *player)
 	return (0);
 }
 
-
-void init_player(t_data *data)
+void	init_player(t_data *data)
 {
-	if (!get_position(data->map.map_mtx, &data->player)) 
+	if (!get_position(data->map.map_mtx, &data->player))
 	{
-        printf("Error: Player position not found!\n");
-        exit(1);
-    }
+		printf("Error: Player position not found!\n");
+		exit(1);
+	}
 }

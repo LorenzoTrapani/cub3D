@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:39:31 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/30 13:16:49 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:41:46 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	open_window(t_data *data)
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	mlx_hook(data->window, KeyPress, KeyPressMask, &key_press, data);
 	mlx_hook(data->window, KeyRelease, KeyReleaseMask, &key_release, data);
-	mlx_hook(data->window, DestroyNotify, StructureNotifyMask, &close_window, data);
+	mlx_hook(data->window, DestroyNotify, StructureNotifyMask,
+		&close_window, data);
 }
-

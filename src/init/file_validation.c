@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/20 13:16:04 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:36:08 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	add_map_line(t_data *data, char *line, char **buffer)
 {
 	const int		len = ft_strlen(line);
-	int 			i;
+	int				i;
 
 	i = 0;
 	while (line && ft_isspace(line[i]))
