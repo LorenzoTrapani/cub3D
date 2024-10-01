@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 13:06:51 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/27 14:38:51 by lotrapan         ###   ########.fr       */
+/*   Created: 2024/09/20 13:15:35 by lotrapan          #+#    #+#             */
+/*   Updated: 2024/10/01 14:38:56 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	main(int argc, char **argv)
+void	update_player(t_data *data)
 {
-	t_data	data;
+	handle_movement(data);
+	handle_rotation(data);
+}
 
-	data = (t_data){0};
-	if (!file_validation(&data, argc, argv))
-		return (0);
-	data.mlx = mlx_init();
-	init_player(&data);
-	init_keys(&data);
-	open_window(&data);
-	mlx_loop_hook(data.mlx, &game_loop, &data);
-	mlx_loop(data.mlx);
+int	game_loop(t_data *data)
+{
+	mlx_clear_window(data->mlx, data->window);
+	update_player(data);
+	render_ceiling(data);
+	render_floor(data);
+	render_minimap(data);
+	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 	return (1);
 }

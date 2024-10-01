@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:18 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/13 16:32:11 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:36:21 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static bool	start_line_check(char *line, char *prev_line)
 	return (true);
 }
 
-
 static int	middle_line_check(char *line, char *prev_line)
 {
 	int	len;
@@ -66,7 +65,7 @@ static int	middle_line_check(char *line, char *prev_line)
 	{
 		if (!wall_line_check(prev_line + len))
 			return (0);
-	} 
+	}
 	return (1);
 }
 

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 13:06:51 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/09/27 14:38:51 by lotrapan         ###   ########.fr       */
+/*   Created: 2024/09/27 14:39:03 by lotrapan          #+#    #+#             */
+/*   Updated: 2024/10/01 14:35:17 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	main(int argc, char **argv)
+void	init_keys(t_data *data)
 {
-	t_data	data;
-
-	data = (t_data){0};
-	if (!file_validation(&data, argc, argv))
-		return (0);
-	data.mlx = mlx_init();
-	init_player(&data);
-	init_keys(&data);
-	open_window(&data);
-	mlx_loop_hook(data.mlx, &game_loop, &data);
-	mlx_loop(data.mlx);
-	return (1);
+	data->keys[0] = KEY_W;
+	data->keys[1] = KEY_S;
+	data->keys[2] = KEY_A;
+	data->keys[3] = KEY_D;
+	data->keys[4] = KEY_RIGHT;
+	data->keys[5] = KEY_LEFT;
 }
