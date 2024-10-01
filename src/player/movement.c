@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 15:57:47 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:56:40 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 	}
 }*/
 
-void	vertical_adjust(t_data *data, double dir_y)
+/* void	vertical_adjust(t_data *data, double dir_y)
 {
 	double	new_y;
 
@@ -34,7 +34,7 @@ void	vertical_adjust(t_data *data, double dir_y)
 		data->player.y = new_y;
 		vertical_adjust(data, dir_y);
 	}
-}
+} */
 
 void	move_forward(t_data *data)
 {
@@ -50,7 +50,7 @@ void	move_forward(t_data *data)
 		data->player.y = new_y;
 		return ;
 	}
-	vertical_adjust(data, -data->player.dir_y);
+	// vertical_adjust(data, -data->player.dir_y);
 }
 
 void	move_backward(t_data *data)
