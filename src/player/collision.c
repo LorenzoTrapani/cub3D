@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 17:30:39 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 14:43:30 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:39:22 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,4 @@ int	check_vertical_collision(t_data *data, double new_y)
 	return (0);
 }
 
-void	orizontal_adjust(t_data *data, double dir_x)
-{
-	double	new_x;
 
-	new_x = data->player.x + dir_x * 0.01;
-	if (!check_orizontal_collision(data, new_x))
-	{
-		data->player.x = new_x;
-		orizontal_adjust(data, dir_x);
-	}
-}
-
-void	vertical_adjust(t_data *data, double dir_y)
-{
-	double	new_y;
-
-	new_y = data->player.y + dir_y * 0.01;
-	if (!check_vertical_collision(data, new_y))
-	{
-		data->player.y = new_y;
-		vertical_adjust(data, dir_y);
-	}
-}
