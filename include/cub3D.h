@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 15:40:23 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:28:40 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	render_player(t_data *data);
 void	render_minimap(t_data *data);
 void	open_window(t_data *data);
 /*-------PLAYER-------*/
-void	init_player(t_data *data);
+int		get_position(char **map_mtx, t_player *player);
 void	handle_movement(t_data *data);
 void	handle_rotation(t_data *data);
 int		check_orizontal_collision(t_data *data, double new_x);

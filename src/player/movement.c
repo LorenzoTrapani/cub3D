@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 16:56:40 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:19:12 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 {
 	double	new_x;
 
-	new_x = data->player.x + dir_x * 0.01;
+	new_x = data->player.x + dir_x;
 	if (!check_orizontal_collision(data, new_x))
 	{
 		data->player.x = new_x;
 		orizontal_adjust(data, dir_x);
 	}
-}*/
+}
 
-/* void	vertical_adjust(t_data *data, double dir_y)
+void	vertical_adjust(t_data *data, double dir_y)
 {
 	double	new_y;
 
-	new_y = data->player.y + dir_y * 0.01;
+	new_y = data->player.y + dir_y;
 	if (!check_vertical_collision(data, new_y))
 	{
 		data->player.y = new_y;
@@ -36,79 +36,39 @@
 	}
 } */
 
-void	move_forward(t_data *data)
+void	move_forward_back(t_data *data, bool forward)
 {
+	const double dir = (double[2]){-1.0, 1.0}[forward];
 	double	new_x;
 	double	new_y;
 
-	new_x = MOVE_SPEED * data->player.dir_x + data->player.x;
-	new_y = MOVE_SPEED * data->player.dir_y + data->player.y;
-	if (!check_vertical_collision(data, new_y)
-		&& !check_orizontal_collision(data, new_x))
-	{
+	new_x = dir * MOVE_SPEED * data->player.dir_x + data->player.x;
+	new_y = dir * MOVE_SPEED * data->player.dir_y + data->player.y;
+	if (!check_orizontal_collision(data, new_x))
 		data->player.x = new_x;
+	if (!check_vertical_collision(data, new_y))
 		data->player.y = new_y;
-		return ;
-	}
-	// vertical_adjust(data, -data->player.dir_y);
 }
 
-void	move_backward(t_data *data)
+void	move_left_right(t_data *data, bool is_left)
 {
+	const double	dir_x = (double[2]){-1.0, 1.0}[is_left];
+	const double	dir_y = (double[2]){1.0, -1.0}[is_left];
 	double	new_x;
 	double	new_y;
 
-	new_x = -MOVE_SPEED * data->player.dir_x + data->player.x;
-	new_y = -MOVE_SPEED * data->player.dir_y + data->player.y;
-	if (!check_vertical_collision(data, new_y)
-		&& !check_orizontal_collision(data, new_x))
-	{
+	new_x = dir_x * MOVE_SPEED * data->player.dir_y + data->player.x;
+	new_y = dir_y * MOVE_SPEED * data->player.dir_x + data->player.y;
+	if (!check_orizontal_collision(data, new_x))
 		data->player.x = new_x;
+	if (!check_vertical_collision(data, new_y))
 		data->player.y = new_y;
-		return ;
-	}
-}
-
-void	move_left(t_data *data)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = MOVE_SPEED * data->player.dir_y + data->player.x;
-	new_y = -MOVE_SPEED * data->player.dir_x + data->player.y;
-	if (!check_orizontal_collision(data, new_x)
-		&& !check_vertical_collision(data, new_y))
-	{
-		data->player.x = new_x;
-		data->player.y = new_y;
-		return ;
-	}
-}
-
-void	move_right(t_data *data)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = -MOVE_SPEED * data->player.dir_y + data->player.x;
-	new_y = MOVE_SPEED * data->player.dir_x + data->player.y;
-	if (!check_orizontal_collision(data, new_x)
-		&& !check_vertical_collision(data, new_y))
-	{
-		data->player.x = new_x;
-		data->player.y = new_y;
-		return ;
-	}
 }
 
 void	handle_movement(t_data *data)
 {
-	if (data->keys[0] == 1)
-		move_forward(data);
-	if (data->keys[1] == 1)
-		move_backward(data);
-	if (data->keys[2] == 1)
-		move_left(data);
-	if (data->keys[3] == 1)
-		move_right(data);
+	if (data->keys[0] == 1 || data->keys[1] == 1)
+		move_forward_back(data, data->keys[0] == 1);
+	if (data->keys[2] == 1 || data->keys[3] == 1)
+		move_left_right(data, data->keys[2] == 1);
 }

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 17:30:39 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 15:39:22 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:15:00 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_orizontal_collision(t_data *data, double new_x)
 	new_map_x = new_x / TILE_SIZE;
 	i = map_x;
 	while (i != new_map_x + 1 * (new_x > data->player.x)
-		- 1 * (new_x < data->player.x))
+		- 1 * (new_x <= data->player.x))
 	{
 		if (data->map.map_mtx[(int)data->player.y / TILE_SIZE][i] == '1')
 			return (1);
@@ -44,7 +44,7 @@ int	check_vertical_collision(t_data *data, double new_y)
 	new_map_y = new_y / TILE_SIZE;
 	i = map_y;
 	while (i != new_map_y + 1 * (new_y > data->player.y)
-		- 1 * (new_y < data->player.y))
+		- 1 * (new_y <= data->player.y))
 	{
 		if (data->map.map_mtx[i][(int)data->player.x / TILE_SIZE] == '1')
 			return (1);

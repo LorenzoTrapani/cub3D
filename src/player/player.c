@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 14:46:44 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:42:27 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,27 @@ void	get_direction(char c, t_player *player)
 	}
 }
 
+static int	is_valid_char(char c)
+{
+	return (c != '0' && c != '1' && c != ' ' && c != 'N' && c != 'S' &&
+			c != 'E' && c != 'W');
+}
+
 int	get_position(char **map_mtx, t_player *player)
 {
 	int	i;
 	int	j;
+	int found;
 
 	i = -1;
+	found = 0;
 	while (map_mtx[++i])
 	{
 		j = -1;
 		while (map_mtx[i][++j])
 		{
+			if (is_valid_char(map_mtx[i][j]))
+				return (0);
 			if (map_mtx[i][j] == 'N' || map_mtx[i][j] == 'S' ||
 				map_mtx[i][j] == 'E' || map_mtx[i][j] == 'W')
 			{
@@ -58,18 +68,9 @@ int	get_position(char **map_mtx, t_player *player)
 				player->y = i * TILE_SIZE;
 				get_direction(map_mtx[i][j], player);
 				map_mtx[i][j] = '0';
-				return (1);
+				found++;
 			}
 		}
 	}
-	return (0);
-}
-
-void	init_player(t_data *data)
-{
-	if (!get_position(data->map.map_mtx, &data->player))
-	{
-		printf("Error: Player position not found!\n");
-		exit(1);
-	}
+	return (found);
 }

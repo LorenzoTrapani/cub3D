@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 14:36:08 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:42:14 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ int	check_extension(char *file, char *ext)
 
 int	file_validation(t_data *data, int argc, char **argv)
 {
+	int check;
+
+	check = 0;
 	if (argc != 2)
 		return (perror("Error: Wrong number of arguments\n"), 0);
 	if (!check_extension(argv[1], ".cub"))
@@ -88,6 +91,15 @@ int	file_validation(t_data *data, int argc, char **argv)
 	{
 		cleanup(data);
 		return (perror("Error: Invalid map\n"), 0);
+	}
+	check = get_position(data->map.map_mtx, &data->player);
+	if (check != 1)
+	{
+		cleanup(data);
+		if (check == 0)
+			return (perror("Error: No player position\n"), 0);
+		else
+			return (perror("Error: Multiple player positions\n"), 0);
 	}
 	return (1);
 }
