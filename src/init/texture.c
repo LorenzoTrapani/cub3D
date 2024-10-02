@@ -6,18 +6,17 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 18:09:22 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 14:37:08 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:00:08 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	get_texture(t_tex *texture, char *line, int *error)
+int	get_texture(t_tex *texture, char *line)
 {
 	char	*path;
 
 	path = ft_strtrim(line + 2, " ,'\n'");
-	*error = 0;
 	// if (access(path, R_OK) == -1)
 	// 	return (perror("Error: Invalid texture\n"), *error = 1);
 	if (line[0] == 'N' && line[1] == 'O')

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/02 12:42:27 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:37:56 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ void	get_direction(char c, t_player *player)
 
 static int	is_valid_char(char c)
 {
-	return (c != '0' && c != '1' && c != ' ' && c != 'N' && c != 'S' &&
-			c != 'E' && c != 'W');
+	return (c != '0' && c != '1' && c != ' ' && c != 'N' && c != 'S'
+		&& c != 'E' && c != 'W');
 }
 
 int	get_position(char **map_mtx, t_player *player)
 {
 	int	i;
 	int	j;
-	int found;
+	int	found;
 
 	i = -1;
 	found = 0;

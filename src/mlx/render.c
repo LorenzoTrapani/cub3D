@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 15:40:17 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:28:43 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	render_minimap(t_data *data)
 	int	color;
 
 	y = -1;
-	/* if (data->minimap.show == false)
-		return ; */
+	if (data->minimap.show == 1)
+		return ;
 	while (++y < data->map.height)
 	{
 		x = -1;

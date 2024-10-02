@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/02 12:42:14 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:38:34 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	get_map(t_data *data, char *file)
 	int		fd;
 	char	*line;
 	char	*buffer;
-	int		error;
+	int		valid;
 
 	line = NULL;
-	error = 0;
+	valid = 1;
 	buffer = ft_strdup("");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -45,16 +45,17 @@ int	get_map(t_data *data, char *file)
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		parse_line(&data->tex, line, &error);
+		if (!parse_line(&data->tex, line))
+			valid = 0;
 		add_map_line(data, line, &buffer);
 		free(line);
 		line = ft_get_next_line(fd);
 	}
 	close(fd);
-	if (!error)
-		data->map.map_mtx = ft_split(buffer, '\n');
-	free(buffer);
-	return (1);
+	if (!valid)
+		return (free(buffer), 0);
+	data->map.map_mtx = ft_split(buffer, '\n');
+	return (free(buffer), 1);
 }
 
 int	check_extension(char *file, char *ext)
@@ -78,7 +79,7 @@ int	check_extension(char *file, char *ext)
 
 int	file_validation(t_data *data, int argc, char **argv)
 {
-	int check;
+	int	check;
 
 	check = 0;
 	if (argc != 2)
@@ -86,12 +87,9 @@ int	file_validation(t_data *data, int argc, char **argv)
 	if (!check_extension(argv[1], ".cub"))
 		return (perror("Error: Wrong file extension\n"), 0);
 	if (!get_map(data, argv[1]))
-		return (0);
+		return (cleanup(data), perror("Error: Invalid map\n"), 0);
 	if (!map_validation(data->map))
-	{
-		cleanup(data);
-		return (perror("Error: Invalid map\n"), 0);
-	}
+		return (cleanup(data), perror("Error: Invalid map\n"), 0);
 	check = get_position(data->map.map_mtx, &data->player);
 	if (check != 1)
 	{

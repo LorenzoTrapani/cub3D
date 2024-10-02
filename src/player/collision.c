@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 17:30:39 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 19:15:00 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:36:07 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,3 @@ int	check_vertical_collision(t_data *data, double new_y)
 	}
 	return (0);
 }
-
-

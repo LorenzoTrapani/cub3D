@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/02 12:28:40 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:26:21 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_player
 typedef struct s_minimap
 {
 	char		*minimap_data;
-	bool		show;
+	int			show;
 }				t_minimap;
 
 typedef struct s_data
@@ -96,9 +96,9 @@ typedef struct s_data
 void	cleanup(t_data *data);
 /*-------INIT-------*/
 int		file_validation(t_data *data, int argc, char **argv);
-int		parse_line(t_tex *texture, char *line, int *error);
+int		parse_line(t_tex *texture, char *line);
 int		map_validation(t_map map);
-int		get_texture(t_tex *texture, char *line, int *error);
+int		get_texture(t_tex *texture, char *line);
 void	init_keys(t_data *data);
 /*-------MLX-------*/
 void	draw_tile(t_img *img, int x, int y, int color);

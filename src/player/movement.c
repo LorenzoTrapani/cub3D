@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:05:27 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/02 12:19:12 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:37:14 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	vertical_adjust(t_data *data, double dir_y)
 
 void	move_forward_back(t_data *data, bool forward)
 {
-	const double dir = (double[2]){-1.0, 1.0}[forward];
-	double	new_x;
-	double	new_y;
+	const double	dir = (double [2]){-1.0, 1.0}[forward];
+	double			new_x;
+	double			new_y;
 
 	new_x = dir * MOVE_SPEED * data->player.dir_x + data->player.x;
 	new_y = dir * MOVE_SPEED * data->player.dir_y + data->player.y;
@@ -52,10 +52,10 @@ void	move_forward_back(t_data *data, bool forward)
 
 void	move_left_right(t_data *data, bool is_left)
 {
-	const double	dir_x = (double[2]){-1.0, 1.0}[is_left];
-	const double	dir_y = (double[2]){1.0, -1.0}[is_left];
-	double	new_x;
-	double	new_y;
+	const double	dir_x = (double [2]){-1.0, 1.0}[is_left];
+	const double	dir_y = (double [2]){1.0, -1.0}[is_left];
+	double			new_x;
+	double			new_y;
 
 	new_x = dir_x * MOVE_SPEED * data->player.dir_y + data->player.x;
 	new_y = dir_y * MOVE_SPEED * data->player.dir_x + data->player.y;

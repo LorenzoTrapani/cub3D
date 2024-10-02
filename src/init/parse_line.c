@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:31:40 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 14:36:35 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:38:22 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,37 @@ static int	rgb_to_int(int r, int g, int b)
 	return (r << 16 | g << 8 | b << 0);
 }
 
-void	get_color(t_tex *texture, char *line, int *error)
+int	get_color(t_tex *texture, char *line)
 {
 	int		r;
 	int		g;
 	int		b;
+	int		error;
 
-	r = ft_atoi(line + 2, error);
-	g = ft_atoi(ft_strchr(line + 2, ',') + 1, error);
-	b = ft_atoi(ft_strrchr(line + 2, ',') + 1, error);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		*error = 1;
+	r = ft_atoi(line + 2, &error);
+	g = ft_atoi(ft_strchr(line + 2, ',') + 1, &error);
+	b = ft_atoi(ft_strrchr(line + 2, ',') + 1, &error);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 || error == 1)
+		return (0);
 	if (line[0] == 'F')
 		texture->floor = rgb_to_int(r, g, b);
 	else if (line[0] == 'C')
 		texture->ceiling = rgb_to_int(r, g, b);
+	return (1);
 }
 
-int	parse_line(t_tex *texture, char *line, int *error)
+int	parse_line(t_tex *texture, char *line)
 {
+	int	error;
+
+	error = 1;
 	if (!line)
-		return (*error = 1);
+		error = 0;
 	else if (is_empty(line))
-		return (1);
+		error = 1;
 	else if (is_texture(line))
-		return (get_texture(texture, line, error));
+		error = get_texture(texture, line);
 	else if (line && (line[0] == 'F' || line[0] == 'C'))
-		return (get_color(texture, line, error), 1);
-	return (1);
+		error = get_color(texture, line);
+	return (error);
 }

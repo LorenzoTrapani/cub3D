@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:18 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/01 16:49:11 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:22:59 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ int	map_validation(t_map map)
 	while (++i < map.height)
 	{
 		if (!wall_ends_check(map.map_mtx[i]))
-			return (printf("%s, %d\n", map.map_mtx[i], i), 0);
+			return (0);
 		if (i == 0 || i == map.height)
 		{
 			if (!wall_line_check(map.map_mtx[i]))
-				return (printf("%s\n", map.map_mtx[i]), 0);
+				return (0);
 		}
 		else
 		{
 			if (!middle_line_check(map.map_mtx[i], map.map_mtx[i - 1]))
-				return (printf("%s\n", map.map_mtx[i]), 0);
+				return (0);
 		}
 	}
 	return (1);
