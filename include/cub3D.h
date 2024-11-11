@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/10/02 13:26:21 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:46:15 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define WIN_HEIGHT 800
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MOVE_SPEED 1
+# define MOVE_SPEED 0.1
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
 # define TILE_SIZE 8
