@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:28:11 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/11 19:11:09 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:12:10 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	get_direction(char c, t_player *player)
 		player->dir_y = 0;
 		player->dir_angle = 0;
 	}
-	printf("dir[%f][%f] angle[%f]\n", player->dir_x, player->dir_y, player->dir_angle);
 }
 
 static int	is_valid_char(char c)

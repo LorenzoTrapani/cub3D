@@ -19,6 +19,7 @@ SRC		   = src/main.c \
 			src/mlx/game_loop.c \
 			src/mlx/render.c \
 			src/mlx/window.c \
+			src/mlx/dda.c \
 			src/player/movement.c \
 			src/player/player.c \
 			src/player/rotation.c \
