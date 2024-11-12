@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:46:05 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/11 19:11:33 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:53:36 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,24 @@ void	draw_tile(t_img *img, int x, int y, int color)
 
 void	draw_player(t_data *data)
 {
+	int	player_x;
+	int	player_y;
 	int	radius;
-	int	radius_sq;
 	int	x;
 	int	y;
 
 	radius = TILE_SIZE / 2;
-	radius_sq = radius * radius;
-	x = -radius;
-	y = -radius;
+	player_x = data->player.x * TILE_SIZE;
+	player_y = data->player.y * TILE_SIZE;
+	x = - radius;
 	while (x <= radius)
 	{
-		y = -radius;
+		y = - radius;
 		while (y <= radius)
 		{
-			if (x * x + y * y <= radius_sq)
-				draw_pixel(data->img, data->player.x + x,
-					data->player.y + y, RED);
+			if (x * x + y * y <= radius * radius)
+				draw_pixel(data->img, player_x + x,
+					player_y + y, RED);
 			y++;
 		}
 		x++;

@@ -38,6 +38,7 @@ void	get_direction(char c, t_player *player)
 		player->dir_y = 0;
 		player->dir_angle = 0;
 	}
+	printf("dir[%f][%f] angle[%f]\n", player->dir_x, player->dir_y, player->dir_angle);
 }
 
 static int	is_valid_char(char c)
@@ -64,8 +65,8 @@ int	get_position(char **map_mtx, t_player *player)
 			if (map_mtx[i][j] == 'N' || map_mtx[i][j] == 'S' ||
 				map_mtx[i][j] == 'E' || map_mtx[i][j] == 'W')
 			{
-				player->x = j * TILE_SIZE;
-				player->y = i * TILE_SIZE;
+				player->x = j;
+				player->y = i;
 				get_direction(map_mtx[i][j], player);
 				map_mtx[i][j] = '0';
 				found++;

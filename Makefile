@@ -14,8 +14,9 @@ SRC		   = src/main.c \
 			src/init/map_validation.c \
 			src/init/keys.c \
 			src/free/cleanup.c \
-			src/mlx/game_loop.c \
 			src/mlx/draw.c \
+			src/mlx/raycast.c \
+			src/mlx/game_loop.c \
 			src/mlx/render.c \
 			src/mlx/window.c \
 			src/player/movement.c \

@@ -27,36 +27,36 @@ int	key_press(int keycode, t_data *data)
 {
 	if (keycode == KEY_ESC)
 		close_window(data);
-	if (keycode == KEY_W)
+	if (keycode == XK_w)
 		data->keys[0] = 1;
-	if (keycode == KEY_S)
+	if (keycode == XK_s)
 		data->keys[1] = 1;
-	if (keycode == KEY_A)
+	if (keycode == XK_a)
 		data->keys[2] = 1;
-	if (keycode == KEY_D)
+	if (keycode == XK_d)
 		data->keys[3] = 1;
-	if (keycode == KEY_RIGHT)
+	if (keycode == XK_Right)
 		data->keys[4] = 1;
-	if (keycode == KEY_LEFT)
+	if (keycode == XK_Left)
 		data->keys[5] = 1;
 	return (0);
 }
 
 int	key_release(int keycode, t_data *data)
 {
-	if (keycode == KEY_W)
+	if (keycode == XK_w)
 		data->keys[0] = 0;
-	if (keycode == KEY_S)
+	if (keycode == XK_s)
 		data->keys[1] = 0;
-	if (keycode == KEY_A)
+	if (keycode == XK_a)
 		data->keys[2] = 0;
-	if (keycode == KEY_D)
+	if (keycode == XK_d)
 		data->keys[3] = 0;
-	if (keycode == KEY_RIGHT)
+	if (keycode == XK_Right)
 		data->keys[4] = 0;
-	if (keycode == KEY_LEFT)
+	if (keycode == XK_Left)
 		data->keys[5] = 0;
-	if (keycode == KEY_M)
+	if (keycode == XK_m)
 		data->minimap.show *= -1;
 	return (0);
 }

@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 13:15:35 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 14:57:45 by lotrapan         ###   ########.fr       */
+/*   Created: 2024/11/12 14:55:53 by lotrapan          #+#    #+#             */
+/*   Updated: 2024/11/12 14:59:05 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void update_player(t_data *data)
+void init_planes(double *plane_x, double *plane_y, t_data *data)
 {
-	handle_movement(data);
-	handle_rotation(data);
-}
-
-int game_loop(t_data *data)
-{
-	mlx_clear_window(data->mlx, data->window);
-	update_player(data);
-	render_ceiling(data);
-	render_floor(data);
-	render_walls(data);
-	render_minimap(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
-	return (1);
+	const double plane_limit = 0.7;
+	*plane_x = -data->player.dir_y * plane_limit;
+	*plane_y = data->player.dir_x * plane_limit;
 }

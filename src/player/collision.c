@@ -18,13 +18,13 @@ int	check_orizontal_collision(t_data *data, double new_x)
 	int	new_map_x;
 	int	i;
 
-	map_x = data->player.x / TILE_SIZE;
-	new_map_x = new_x / TILE_SIZE;
+	map_x = data->player.x;
+	new_map_x = new_x;
 	i = map_x;
 	while (i != new_map_x + 1 * (new_x > data->player.x)
 		- 1 * (new_x <= data->player.x))
 	{
-		if (data->map.map_mtx[(int)data->player.y / TILE_SIZE][i] == '1')
+		if (data->map.map_mtx[(int)data->player.y][i] == '1')
 			return (1);
 		if (new_x > data->player.x)
 			i++;
@@ -40,13 +40,13 @@ int	check_vertical_collision(t_data *data, double new_y)
 	int	new_map_y;
 	int	i;
 
-	map_y = data->player.y / TILE_SIZE;
-	new_map_y = new_y / TILE_SIZE;
+	map_y = data->player.y;
+	new_map_y = new_y;
 	i = map_y;
 	while (i != new_map_y + 1 * (new_y > data->player.y)
 		- 1 * (new_y <= data->player.y))
 	{
-		if (data->map.map_mtx[i][(int)data->player.x / TILE_SIZE] == '1')
+		if (data->map.map_mtx[i][(int)data->player.x] == '1')
 			return (1);
 		if (new_y > data->player.y)
 			i++;
