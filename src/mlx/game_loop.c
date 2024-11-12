@@ -6,19 +6,19 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:15:35 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 14:57:45 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:08:17 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void update_player(t_data *data)
+void	update_player(t_data *data)
 {
 	handle_movement(data);
 	handle_rotation(data);
 }
 
-int game_loop(t_data *data)
+int	game_loop(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->window);
 	update_player(data);

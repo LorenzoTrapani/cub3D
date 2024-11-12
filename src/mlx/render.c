@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 16:02:26 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:39:23 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ void	render_minimap(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 10, 10);
 }
 
-void render_walls(t_data *data)
+void	render_walls(t_data *data)
 {
-	init_planes(data);
-	int i;
+	int	i;
+
 	i = -1;
+	init_planes(data);
 	while (++i < WIN_WIDTH)
 		render_wall_column(data, i);
 }

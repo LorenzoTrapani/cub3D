@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:46:05 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 14:53:36 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:32:27 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	draw_player(t_data *data)
 	radius = TILE_SIZE / 2;
 	player_x = data->player.x * TILE_SIZE;
 	player_y = data->player.y * TILE_SIZE;
-	x = - radius;
+	x = -radius;
 	while (x <= radius)
 	{
-		y = - radius;
+		y = -radius;
 		while (y <= radius)
 		{
 			if (x * x + y * y <= radius * radius)

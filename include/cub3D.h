@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 16:11:45 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:42:02 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define WIN_HEIGHT 800
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MOVE_SPEED .22
+# define MOVE_SPEED .1
 # define MAX_FOV .7
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
@@ -81,22 +81,22 @@ typedef struct s_minimap
 	int			show;
 }				t_minimap;
 
-typedef struct
+typedef struct s_ray
 {
-	double plane_x;
-	double plane_y;
-	double ray_dir_x;
-	double ray_dir_y;
-	double delta_dist_x;
-	double delta_dist_y;
-	double side_dist_x;
-	double side_dist_y;
-	double perp_wall_dist;
-	int step_x;
-	int step_y;
-	int map_x;
-	int map_y;
-	bool last_hit_nord;
+	double	plane_x;
+	double	plane_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_d_x;
+	double	side_d_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
+	bool	last_hit_nord;
 }				t_raycasting;
 
 typedef struct s_data
@@ -133,7 +133,7 @@ void	open_window(t_data *data);
 void	render_walls(t_data *data);
 void	init_planes(t_data *data);
 void	render_wall_column(t_data *data, int i);
-void	perform_dda(t_data *data);
+void	perform_dda(t_data *data, t_raycasting *ray);
 void	calculate_wall_limits(int wall_height, int *wall_top, int *wall_bottom);
 /*-------PLAYER-------*/
 int		get_position(char **map_mtx, t_player *player);
@@ -141,6 +141,5 @@ void	handle_movement(t_data *data);
 void	handle_rotation(t_data *data);
 int		check_orizontal_collision(t_data *data, double new_x);
 int		check_vertical_collision(t_data *data, double new_y);
-
 
 #endif
