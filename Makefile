@@ -14,12 +14,13 @@ SRC		   = src/main.c \
 			src/init/map_validation.c \
 			src/init/keys.c \
 			src/free/cleanup.c \
+			src/mlx/calculate.c \
+			src/mlx/dda.c \
 			src/mlx/draw.c \
 			src/mlx/raycast.c \
 			src/mlx/game_loop.c \
 			src/mlx/render.c \
 			src/mlx/window.c \
-			src/mlx/dda.c \
 			src/player/movement.c \
 			src/player/player.c \
 			src/player/rotation.c \

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:07:30 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 17:43:56 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:56:16 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,24 @@ void	assign_side_t(t_raycasting *ray)
 	ray->side = true;
 }
 
+void	get_wall_dir(t_raycasting *ray)
+{
+	if (ray->side == false)
+	{
+		if (ray->ray_dir_x > 0)
+			ray->wall_dir = WEST;
+		else
+			ray->wall_dir = EAST;
+	}
+	else
+	{
+		if (ray->ray_dir_y > 0)
+			ray->wall_dir = NORTH;
+		else
+			ray->wall_dir = SOUTH;
+	}
+}
+
 void	perform_dda(t_data *data, t_raycasting *ray)
 {
 	bool	hit;
@@ -39,10 +57,7 @@ void	perform_dda(t_data *data, t_raycasting *ray)
 			assign_side_t(ray);
 		if (data->map.map_mtx[ray->map_y][ray->map_x] == '1')
 		{
-			if (ray->side == false)
-				ray->wall_dir = (ray->ray_dir_x > 0) ? WEST : EAST;
-			else
-				ray->wall_dir = (ray->ray_dir_y > 0) ? NORTH : SOUTH;
+			get_wall_dir(ray);
 			hit = true;
 		}
 	}

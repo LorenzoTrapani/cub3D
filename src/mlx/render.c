@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 19:44:46 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:46:36 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,6 @@ void	render_floor(t_data *data)
 		x = -1;
 		while (++x < WIN_WIDTH)
 			draw_pixel(data->img, x, y, data->tex.floor);
-	}
-}
-
-void	draw_line_dir(t_data *data)
-{
-	double	new_x;
-	double	new_y;
-	int		i;
-
-	i = 0;
-	new_x = data->player.x * TILE_SIZE;
-	new_y = data->player.y * TILE_SIZE;
-	while (i < 20)
-	{
-		new_x += data->player.dir_x;
-		new_y += data->player.dir_y;
-		draw_pixel(data->img, new_x, new_y, RED);
-		i++;
 	}
 }
 

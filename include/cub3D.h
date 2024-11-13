@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 19:29:51 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:50:18 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,13 @@ void	init_planes(t_data *data);
 void	render_wall_column(t_data *data, int i);
 void	perform_dda(t_data *data, t_raycasting *ray);
 void	calculate_wall_limits(int wall_height, int *wall_top, int *wall_bottom);
+void	draw_wall(t_data *data, int x, int y, int wall_bottom);
+void	draw_line_dir(t_data *data);
+int		get_texture_color(t_data *data, int tex_x, double tex_pos);
+void	calculate_ray_direction(t_data *data, double camera_x);
+void	calculate_delta_distance(t_data *data);
+void	calculate_step(t_data *data, int wall_height, int wall_top);
+double	calculate_hit_point(t_data *data);
 /*-------PLAYER-------*/
 int		get_position(char **map_mtx, t_player *player);
 void	handle_movement(t_data *data);
