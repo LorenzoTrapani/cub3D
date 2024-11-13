@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 17:44:58 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:29:51 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct s_tex
 	char		*east_path;
 	int			floor;
 	int			ceiling;
+	double		step;
+	double		tex_pos;
+	double		hit_point;
+	int			tex_x;
 }			t_tex;
 
 typedef struct s_map

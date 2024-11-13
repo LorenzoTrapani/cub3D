@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:55:53 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 17:45:27 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:35:54 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,25 @@ int get_texture_color(t_data *data, int tex_x, double tex_pos)
     return color;
 }
 
+void	calculate_step(t_data *data, int wall_height, int wall_top)
+{
+	data->tex.step = (double)TEX_HEIGHT / wall_height;
+	data->tex.tex_pos = (wall_top - WIN_HEIGHT / 2 + wall_height / 2) * data->tex.step;
+}
+
+double	calculate_hit_point(t_data *data)
+{
+	double hit_point;
+
+	if (data->ray.side == 0) // Colpito un lato verticale
+        hit_point = data->player.y + data->ray.perp_wall_dist * data->ray.ray_dir_y;
+    else                      // Colpito un lato orizzontale
+        hit_point = data->player.x + data->ray.perp_wall_dist * data->ray.ray_dir_x;
+
+    hit_point -= floor(hit_point);
+	return (hit_point);
+}
+
 
 void	render_wall_column(t_data *data, int x)
 {
@@ -115,26 +134,17 @@ void	render_wall_column(t_data *data, int x)
 		data->ray.perp_wall_dist = 0.001;
 	wall_height = (int)(WIN_HEIGHT / data->ray.perp_wall_dist);
 	calculate_wall_limits(wall_height, &wall_top, &wall_bottom);
-	double step = (double)TEX_HEIGHT / wall_height;
-    double tex_pos = (wall_top < 0 ? 0 : wall_top - WIN_HEIGHT / 2 + wall_height / 2) * step;
-
-    // Calcola la coordinata X nella texture (da 0 a TEX_WIDTH - 1) in base al punto di impatto del raggio
-    double hit_point;
-    if (data->ray.side == 0) // Colpito un lato verticale
-        hit_point = data->player.y + data->ray.perp_wall_dist * data->ray.ray_dir_y;
-    else                      // Colpito un lato orizzontale
-        hit_point = data->player.x + data->ray.perp_wall_dist * data->ray.ray_dir_x;
-
-    hit_point -= floor(hit_point);
-    int tex_x = (int)(hit_point * TEX_WIDTH);
+	calculate_step(data, wall_height, wall_top);
+    data->tex.hit_point = calculate_hit_point(data);    
+    data->tex.tex_x = (int)(data->tex.hit_point * TEX_WIDTH);
 
     for (int y = wall_top; y <= wall_bottom; y++)
     {
         if (y >= 0 && y < WIN_HEIGHT)  // Assicurati di disegnare solo all'interno della finestra
         {
-            int color = get_texture_color(data, tex_x, tex_pos);
+            int color = get_texture_color(data, data->tex.tex_x, data->tex.tex_pos);
             draw_pixel(data->img, x, y, color);
         }
-        tex_pos += step; // Avanza nella texture per ogni riga della colonna
+        data->tex.tex_pos += data->tex.step; // Avanza nella texture per ogni riga della colonna
     }
 }
