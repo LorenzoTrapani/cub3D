@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 17:36:01 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:44:58 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@
 
 typedef struct s_tex
 {
-	t_img   	north_img;
-    t_img   	south_img;
-    t_img   	west_img;
-    t_img   	east_img;
+	t_img		north_img;
+	t_img		south_img;
+	t_img		west_img;
+	t_img		east_img;
 	char		*north_path;
 	char		*south_path;
 	char		*west_path;
@@ -113,7 +113,7 @@ typedef struct s_ray
 	int		map_x;
 	int		map_y;
 	bool	side;
-	t_dir 	wall_dir;
+	t_dir	wall_dir;
 }				t_raycasting;
 
 typedef struct s_data

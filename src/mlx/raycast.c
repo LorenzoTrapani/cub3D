@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:55:53 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 17:08:19 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:45:27 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,6 @@ void	render_wall_column(t_data *data, int x)
 		data->ray.perp_wall_dist = 0.001;
 	wall_height = (int)(WIN_HEIGHT / data->ray.perp_wall_dist);
 	calculate_wall_limits(wall_height, &wall_top, &wall_bottom);
-	/* while (wall_top <= wall_bottom)
-	{
-		draw_pixel(data->img, x, wall_top, get_texture_color(data, x, wall_top, wall_bottom));
-		wall_top++;
-	} */
 	double step = (double)TEX_HEIGHT / wall_height;
     double tex_pos = (wall_top < 0 ? 0 : wall_top - WIN_HEIGHT / 2 + wall_height / 2) * step;
 
@@ -133,7 +128,6 @@ void	render_wall_column(t_data *data, int x)
     hit_point -= floor(hit_point);
     int tex_x = (int)(hit_point * TEX_WIDTH);
 
-    // Disegna ogni pixel della colonna del muro
     for (int y = wall_top; y <= wall_bottom; y++)
     {
         if (y >= 0 && y < WIN_HEIGHT)  // Assicurati di disegnare solo all'interno della finestra

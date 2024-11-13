@@ -6,11 +6,25 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:07:30 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 16:46:35 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:43:56 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	assign_side_f(t_raycasting *ray)
+{
+	ray->side_d_x += ray->delta_dist_x;
+	ray->map_x += ray->step_x;
+	ray->side = false;
+}
+
+void	assign_side_t(t_raycasting *ray)
+{
+	ray->side_d_y += ray->delta_dist_y;
+	ray->map_y += ray->step_y;
+	ray->side = true;
+}
 
 void	perform_dda(t_data *data, t_raycasting *ray)
 {
@@ -20,17 +34,9 @@ void	perform_dda(t_data *data, t_raycasting *ray)
 	while (!hit)
 	{
 		if (ray->side_d_x < ray->side_d_y)
-		{
-			ray->side_d_x += ray->delta_dist_x;
-			ray->map_x += ray->step_x;
-			ray->side = false;
-		}
+			assign_side_f(ray);
 		else
-		{
-			ray->side_d_y += ray->delta_dist_y;
-			ray->map_y += ray->step_y;
-			ray->side = true;
-		}
+			assign_side_t(ray);
 		if (data->map.map_mtx[ray->map_y][ray->map_x] == '1')
 		{
 			if (ray->side == false)
