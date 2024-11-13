@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 18:09:22 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 17:40:48 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:25:26 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,5 @@ int	init_textures(t_data *data)
 		return (0);
 	if (!load_texture(data, &data->tex.east_img, data->tex.east_path))
 		return (0);
-	if (data->tex.north_path)
-		free(data->tex.north_path);
-	if (data->tex.south_path)
-		free(data->tex.south_path);
-	if (data->tex.west_path)
-		free(data->tex.west_path);
-	if (data->tex.east_path)
-		free(data->tex.east_path);
-	data->tex.north_path = NULL;
-	data->tex.south_path = NULL;
-	data->tex.west_path = NULL;
-	data->tex.east_path = NULL;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:04:52 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 16:32:41 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:07:12 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ void	free_texture(void *mlx, t_tex *tex)
 		mlx_destroy_image(mlx, tex->west_img.image);
 	if (tex->east_img.image)
 		mlx_destroy_image(mlx, tex->east_img.image);
+	if (tex->north_path)
+		free(tex->north_path);
+	if (tex->south_path)
+		free(tex->south_path);
+	if (tex->west_path)
+		free(tex->west_path);
+	if (tex->east_path)
+		free(tex->east_path);
+	tex->north_path = NULL;
+	tex->south_path = NULL;
+	tex->west_path = NULL;
+	tex->east_path = NULL;
 }
 
 void	cleanup(t_data *data)

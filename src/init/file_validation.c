@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 16:36:37 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:25:11 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ int	check_extension(char *file, char *ext)
 	return (1);
 }
 
+int	check_texture(t_tex *tex)
+{
+	if (!tex->north_path || !tex->south_path
+		|| !tex->west_path || !tex->east_path)
+		return (0);
+	return (1);
+}
+
 int	file_validation(t_data *data, int argc, char **argv)
 {
 	int	check;
@@ -88,6 +96,8 @@ int	file_validation(t_data *data, int argc, char **argv)
 		return (perror("Error: Wrong file extension\n"), 0);
 	if (!get_map(data, argv[1]))
 		return (cleanup(data), perror("Error: Invalid map\n"), 0);
+	if (!check_texture(&data->tex))
+		return (cleanup(data), perror("Error: Missing texture\n"), 0);
 	if (!map_validation(data->map))
 		return (cleanup(data), perror("Error: Invalid map\n"), 0);
 	check = get_position(data->map.map_mtx, &data->player);

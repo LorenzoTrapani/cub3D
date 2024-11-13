@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 19:50:18 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:12:26 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define WIN_HEIGHT 800
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MOVE_SPEED 0.07
-# define ROT_SPEED 2.2
+# define MOVE_SPEED 0.09
+# define ROT_SPEED 2.4
 # define FOV 0.9
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
@@ -142,6 +142,7 @@ int		map_validation(t_map map);
 int		get_texture(t_tex *texture, char *line);
 void	init_keys(t_data *data);
 int		init_textures(t_data *data);
+int		check_texture(t_tex *tex);
 /*-------MLX-------*/
 void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_pixel(t_img *img, int x, int y, int color);
