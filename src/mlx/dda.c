@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:07:30 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 17:38:25 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:46:35 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,24 @@ void	perform_dda(t_data *data, t_raycasting *ray)
 		{
 			ray->side_d_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->last_hit_nord = false;
+			ray->side = false;
 		}
 		else
 		{
 			ray->side_d_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->last_hit_nord = true;
+			ray->side = true;
 		}
 		if (data->map.map_mtx[ray->map_y][ray->map_x] == '1')
+		{
+			if (ray->side == false)
+				ray->wall_dir = (ray->ray_dir_x > 0) ? WEST : EAST;
+			else
+				ray->wall_dir = (ray->ray_dir_y > 0) ? NORTH : SOUTH;
 			hit = true;
+		}
 	}
-	if (ray->last_hit_nord == false)
+	if (ray->side == false)
 		ray->perp_wall_dist = (ray->side_d_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_d_y - ray->delta_dist_y);

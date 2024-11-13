@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:59:15 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 17:39:23 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:44:46 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	render_minimap(t_data *data)
 		{
 			color = data->tex.ceiling;
 			if (data->map.map_mtx[y][x] == '1')
-				color = GREY;
+				color = GRAY;
 			else if (data->map.map_mtx[y][x] == '0')
 				color = WHITE;
 			if (color != data->tex.ceiling)

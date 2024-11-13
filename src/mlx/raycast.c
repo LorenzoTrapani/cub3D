@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:55:53 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 18:27:10 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:08:19 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_planes(t_data *data)
 {
-	const double	plane_limit = 0.7;
+	const double	plane_limit = FOV;
 
 	data->ray.plane_x = -data->player.dir_y * plane_limit;
 	data->ray.plane_y = data->player.dir_x * plane_limit;
@@ -64,14 +64,49 @@ void	init_step_and_side_dist(t_data *data, t_raycasting *ray)
 	}
 }
 
-void	render_wall_column(t_data *data, int i)
+t_img	*selected_texture(t_data *data)
+{
+	t_img	*texture;
+
+	if (data->ray.wall_dir == NORTH)
+		texture = &data->tex.north_img;
+	else if (data->ray.wall_dir == SOUTH)
+		texture = &data->tex.south_img;
+	else if (data->ray.wall_dir == WEST)
+		texture = &data->tex.west_img;
+	else
+		texture = &data->tex.east_img;
+	return (texture);
+}
+
+int get_texture_color(t_data *data, int tex_x, double tex_pos)
+{
+    int tex_y;
+    int color;
+    t_img *texture;
+
+    // Seleziona la texture corretta in base alla direzione del raggio
+    texture = selected_texture(data);
+
+    // Calcola la coordinata Y attuale nella texture
+    tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+
+    // Recupera il colore del pixel dalla texture alla posizione (tex_x, tex_y)
+    int pixel_offset = (tex_y * texture->size_line) + (tex_x * (texture->bpp / 8));
+    color = *(int *)(texture->data + pixel_offset);
+
+    return color;
+}
+
+
+void	render_wall_column(t_data *data, int x)
 {
 	double	camera_x;
 	int		wall_height;
 	int		wall_top;
 	int		wall_bottom;
 
-	camera_x = 2.0 * i / (double)WIN_WIDTH - 1.0;
+	camera_x = 2.0 * x / (double)WIN_WIDTH - 1.0;
 	calculate_ray_direction(data, camera_x);
 	calculate_delta_distance(data);
 	init_step_and_side_dist(data, &data->ray);
@@ -80,9 +115,32 @@ void	render_wall_column(t_data *data, int i)
 		data->ray.perp_wall_dist = 0.001;
 	wall_height = (int)(WIN_HEIGHT / data->ray.perp_wall_dist);
 	calculate_wall_limits(wall_height, &wall_top, &wall_bottom);
-	while (wall_top <= wall_bottom)
+	/* while (wall_top <= wall_bottom)
 	{
-		draw_pixel(data->img, i, wall_top, 0x0);
+		draw_pixel(data->img, x, wall_top, get_texture_color(data, x, wall_top, wall_bottom));
 		wall_top++;
-	}
+	} */
+	double step = (double)TEX_HEIGHT / wall_height;
+    double tex_pos = (wall_top < 0 ? 0 : wall_top - WIN_HEIGHT / 2 + wall_height / 2) * step;
+
+    // Calcola la coordinata X nella texture (da 0 a TEX_WIDTH - 1) in base al punto di impatto del raggio
+    double hit_point;
+    if (data->ray.side == 0) // Colpito un lato verticale
+        hit_point = data->player.y + data->ray.perp_wall_dist * data->ray.ray_dir_y;
+    else                      // Colpito un lato orizzontale
+        hit_point = data->player.x + data->ray.perp_wall_dist * data->ray.ray_dir_x;
+
+    hit_point -= floor(hit_point);
+    int tex_x = (int)(hit_point * TEX_WIDTH);
+
+    // Disegna ogni pixel della colonna del muro
+    for (int y = wall_top; y <= wall_bottom; y++)
+    {
+        if (y >= 0 && y < WIN_HEIGHT)  // Assicurati di disegnare solo all'interno della finestra
+        {
+            int color = get_texture_color(data, tex_x, tex_pos);
+            draw_pixel(data->img, x, y, color);
+        }
+        tex_pos += step; // Avanza nella texture per ogni riga della colonna
+    }
 }

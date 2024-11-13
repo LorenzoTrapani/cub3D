@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/12 17:42:02 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:36:01 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,33 @@
 # define WIN_HEIGHT 800
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MOVE_SPEED .1
-# define MAX_FOV .7
+# define MOVE_SPEED 0.07
+# define ROT_SPEED 2.2
+# define FOV 0.9
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
 # define TILE_SIZE 8
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
 # define RED 0x00FF0000
-# define GREY 0x00808080
+# define GRAY 0x00808080
 # define BLUE 0x000000FF
 # define GREEN 0x0000FF00
 # define ORANGE 0x00FFA500
 
 typedef struct s_tex
 {
-	void		*north;
-	void		*south;
-	void		*west;
-	void		*east;
+	t_img   	north_img;
+    t_img   	south_img;
+    t_img   	west_img;
+    t_img   	east_img;
+	char		*north_path;
+	char		*south_path;
+	char		*west_path;
+	char		*east_path;
 	int			floor;
 	int			ceiling;
 }			t_tex;
@@ -81,6 +89,14 @@ typedef struct s_minimap
 	int			show;
 }				t_minimap;
 
+typedef enum e_dir
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}				t_dir;
+
 typedef struct s_ray
 {
 	double	plane_x;
@@ -96,7 +112,8 @@ typedef struct s_ray
 	int		step_y;
 	int		map_x;
 	int		map_y;
-	bool	last_hit_nord;
+	bool	side;
+	t_dir 	wall_dir;
 }				t_raycasting;
 
 typedef struct s_data
@@ -120,6 +137,7 @@ int		parse_line(t_tex *texture, char *line);
 int		map_validation(t_map map);
 int		get_texture(t_tex *texture, char *line);
 void	init_keys(t_data *data);
+int		init_textures(t_data *data);
 /*-------MLX-------*/
 void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_pixel(t_img *img, int x, int y, int color);
