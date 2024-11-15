@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:55:53 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 19:52:12 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:49:27 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	render_wall_column(t_data *data, int x)
 	calculate_delta_distance(data);
 	init_step_and_side_dist(data, &data->ray);
 	perform_dda(data, &data->ray);
-	if (data->ray.perp_wall_dist < 0.001)
-		data->ray.perp_wall_dist = 0.001;
 	wall_height = (int)(WIN_HEIGHT / data->ray.perp_wall_dist);
 	calculate_wall_limits(wall_height, &wall_top, &wall_bottom);
 	calculate_step(data, wall_height, wall_top);

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:09:12 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/02/21 18:14:40 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:32:15 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_atoi(const char *nptr, int *error)
 	num = ft_mount_num(nptr, error);
 	if (*error == 1)
 		return (0);
-	if (num < INT_MIN || num > INT_MAX)
+	if (num < INT_MIN || num > INT_MAX || num <= 0)
 	{
 		*error = 1;
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:17:28 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 20:25:11 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:38:43 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_map(t_data *data, char *file)
 	buffer = ft_strdup("");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error: Could not open file\n"), 0);
+		return (free(buffer), perror("Error: Could not open file\n"), 0);
 	line = ft_get_next_line(fd);
 	while (line)
 	{

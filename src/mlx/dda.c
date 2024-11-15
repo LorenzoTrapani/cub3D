@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:07:30 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 19:56:16 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:19:18 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void	get_wall_dir(t_raycasting *ray)
 void	perform_dda(t_data *data, t_raycasting *ray)
 {
 	bool	hit;
+	double	offset;
 
 	hit = false;
+	offset = 0.01;
 	while (!hit)
 	{
 		if (ray->side_d_x < ray->side_d_y)
@@ -65,6 +67,8 @@ void	perform_dda(t_data *data, t_raycasting *ray)
 		ray->perp_wall_dist = (ray->side_d_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_d_y - ray->delta_dist_y);
+	if (ray->perp_wall_dist < offset)
+		ray->perp_wall_dist = offset;
 }
 
 void	calculate_wall_limits(int wall_height, int *wall_top, int *wall_bottom)
