@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:55:53 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/15 18:49:27 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:33:11 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,42 @@ int	get_texture_color(t_data *data, int tex_x, double tex_pos)
 	t_img	*texture;
 
 	texture = selected_texture(data);
-	tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+	tex_y = (int)tex_pos % texture->height;
 	pixel_color = (tex_y * texture->size_line) + (tex_x * (texture->bpp / 8));
 	color = *(int *)(texture->data + pixel_color);
 	return (color);
 }
+
+void calculate_texture_limit(t_data *data)
+{
+    if (data->ray.side == false)
+    {
+        if (data->ray.ray_dir_x > 0)
+        {
+            data->tex.width = data->tex.west_img.width;
+            data->tex.height = data->tex.west_img.height;
+        }
+        else
+        {
+            data->tex.width = data->tex.east_img.width;
+            data->tex.height = data->tex.east_img.height;
+        }
+    }
+    else
+    {
+        if (data->ray.ray_dir_y > 0)
+        {
+            data->tex.width = data->tex.north_img.width;
+            data->tex.height = data->tex.north_img.height;
+        }
+        else
+        {
+            data->tex.width = data->tex.south_img.width;
+            data->tex.height = data->tex.south_img.height;
+        }
+    }
+}
+
 
 void	render_wall_column(t_data *data, int x)
 {
@@ -89,10 +120,17 @@ void	render_wall_column(t_data *data, int x)
 	calculate_delta_distance(data);
 	init_step_and_side_dist(data, &data->ray);
 	perform_dda(data, &data->ray);
+	
+
 	wall_height = (int)(WIN_HEIGHT / data->ray.perp_wall_dist);
 	calculate_wall_limits(wall_height, &wall_top, &wall_bottom);
 	calculate_step(data, wall_height, wall_top);
+
+
+	calculate_texture_limit(data);
+
 	data->tex.hit_point = calculate_hit_point(data);
-	data->tex.tex_x = (int)(data->tex.hit_point * TEX_WIDTH);
+	data->tex.tex_x = (int)(data->tex.hit_point * (double)data->tex.width);
+
 	draw_wall(data, x, wall_top, wall_bottom);
 }

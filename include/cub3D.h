@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 20:12:26 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:30:16 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
 # define TILE_SIZE 8
-# define TEX_WIDTH 64
-# define TEX_HEIGHT 64
 
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
@@ -69,7 +67,9 @@ typedef struct s_tex
 	double		tex_pos;
 	double		hit_point;
 	int			tex_x;
-}			t_tex;
+	int			width;
+	int			height;
+}				t_tex;
 
 typedef struct s_map
 {

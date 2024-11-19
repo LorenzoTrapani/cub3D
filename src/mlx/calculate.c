@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:48:20 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/15 18:51:42 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:25:20 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,18 @@ void	calculate_delta_distance(t_data *data)
 
 void	calculate_step(t_data *data, int wall_height, int wall_top)
 {
-	data->tex.step = (double)TEX_HEIGHT / wall_height;
-	data->tex.tex_pos = (wall_top - WIN_HEIGHT / 2 + wall_height / 2)
-		* data->tex.step;
+	if (wall_height < 1)
+        wall_height = 1; // Evita valori troppo piccoli
+    data->tex.step = 1.0 * data->tex.height / wall_height;
+
+    if (wall_top < 0) // Se il muro inizia sopra lo schermo
+        data->tex.tex_pos = (-wall_top) * data->tex.step;
+    else
+        data->tex.tex_pos = (wall_top - WIN_HEIGHT / 2 + wall_height / 2) * data->tex.step;
+
+    // Evita valori negativi o fuori dai limiti
+    if (data->tex.tex_pos < 0)
+        data->tex.tex_pos = 0;
 }
 
 double	calculate_hit_point(t_data *data)
