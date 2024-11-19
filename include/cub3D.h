@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:32:45 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/19 17:30:16 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:38:27 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	calculate_ray_direction(t_data *data, double camera_x);
 void	calculate_delta_distance(t_data *data);
 void	calculate_step(t_data *data, int wall_height, int wall_top);
 double	calculate_hit_point(t_data *data);
+void	calculate_texture_limit(t_data *data);
 /*-------PLAYER-------*/
 int		get_position(char **map_mtx, t_player *player);
 void	handle_movement(t_data *data);
