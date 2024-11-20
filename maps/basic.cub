@@ -1,7 +1,7 @@
-NO texture/walls1.xpm
-SO texture/walls2.xpm
-WE texture/walls3.xpm
-EA texture/walls4.xpm
+EA texture/east_wall.xpm
+NO texture/north_wall.xpm
+SO texture/south_wall.xpm
+WE texture/west_wall.xpm
 
 F 105,104,92
 C 8,82,92

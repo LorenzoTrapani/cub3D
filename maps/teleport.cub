@@ -1,7 +1,7 @@
+EA texture/east_wall.xpm
 NO texture/north_wall.xpm
 SO texture/south_wall.xpm
 WE texture/west_wall.xpm
-EA texture/east_wall.xpm
 
 F 105,104,92
 C 8,82,92
@@ -45,7 +45,7 @@ C 8,82,92
               111111101111111
               100000000000001
               100000000000001
-              100000N00000001
+              100000S00000001
               100000000000001
               100000010000001
               100000001000001

@@ -6,7 +6,7 @@
 /*   By: lotrapan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:31:40 by lotrapan          #+#    #+#             */
-/*   Updated: 2024/11/13 20:16:45 by lotrapan         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:42:53 by lotrapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ int	parse_line(t_tex *texture, char *line)
 		error = get_texture(texture, line);
 	else if (line && (line[0] == 'F' || line[0] == 'C'))
 		error = get_color(texture, line);
+	else if (!texture->ceiling || !texture->floor)
+		error = 0;
 	return (error);
 }
